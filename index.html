@@ -3,7 +3,129 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>CoWorkHub - Home</title>
+  <meta name="description" content="StudySit - India's premier coworking spac  <!-- HERO SECTION -->
+  <section class="section">
+    <div class="container">
+      <div class="grid grid-2" style="align-items: center; gap: 3rem;">
+        <div class="animate-on-scroll">
+          <h2 style="font-size: 3rem; color: white; margin-bottom: 1rem;">Find Your Perfect Workspace</h2>
+          <p style="font-size: 1.25rem; color: white; margin-bottom: 2rem;">
+            Whether you're a student cramming for exams or a professional building the next big thing, 
+            StudySit provides the perfect environment to be productive.
+          </p>
+          <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+            <button class="btn btn-primary btn-lg book-now-btn" data-space-type="Hot Desk" data-price="₹500">
+              <i class="fas fa-calendar-check"></i> Book Now
+            </button>
+            <a href="#features" class="btn btn-secondary btn-lg">
+              <i class="fas fa-arrow-down"></i> Learn More
+            </a>
+          </div>
+        </div>
+        <div class="animate-on-scroll">
+          <img src="MYPHOTO.jpg" alt="Modern coworking space at StudySit" 
+               style="border-radius: 1rem; box-shadow: 0 20px 40px rgba(0,0,0,0.2);">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES SECTION -->
+  <section id="features" class="section section-alt">
+    <div class="container">
+      <div class="animate-on-scroll" style="text-align: center; margin-bottom: 3rem;">
+        <h2>Why Choose StudySit?</h2>
+        <p style="font-size: 1.125rem; color: var(--text-secondary); max-width: 600px; margin: 0 auto;">
+          We've designed every aspect of our space to help you be more productive, connected, and successful.
+        </p>
+      </div>
+      
+      <div class="grid grid-3">
+        <div class="card animate-on-scroll">
+          <div class="card-header">
+            <i class="fas fa-wifi" style="font-size: 2rem; color: var(--primary-color); margin-bottom: 1rem;"></i>
+            <h3>Lightning Fast WiFi</h3>
+          </div>
+          <div class="card-body">
+            <p>High-speed internet with 100+ Mbps download speeds. Never worry about connectivity again.</p>
+          </div>
+        </div>
+        
+        <div class="card animate-on-scroll">
+          <div class="card-header">
+            <i class="fas fa-coffee" style="font-size: 2rem; color: var(--primary-color); margin-bottom: 1rem;"></i>
+            <h3>Premium Coffee</h3>
+          </div>
+          <div class="card-body">
+            <p>Unlimited access to freshly brewed coffee, tea, and healthy snacks to keep you energized.</p>
+          </div>
+        </div>
+        
+        <div class="card animate-on-scroll">
+          <div class="card-header">
+            <i class="fas fa-users" style="font-size: 2rem; color: var(--primary-color); margin-bottom: 1rem;"></i>
+            <h3>Vibrant Community</h3>
+          </div>
+          <div class="card-body">
+            <p>Connect with like-minded students and professionals. Build your network while you work.</p>
+          </div>
+        </div>
+        
+        <div class="card animate-on-scroll">
+          <div class="card-header">
+            <i class="fas fa-clock" style="font-size: 2rem; color: var(--primary-color); margin-bottom: 1rem;"></i>
+            <h3>24/7 Access</h3>
+          </div>
+          <div class="card-body">
+            <p>Work on your schedule. Our spaces are accessible round the clock for maximum flexibility.</p>
+          </div>
+        </div>
+        
+        <div class="card animate-on-scroll">
+          <div class="card-header">
+            <i class="fas fa-shield-alt" style="font-size: 2rem; color: var(--primary-color); margin-bottom: 1rem;"></i>
+            <h3>Secure Environment</h3>
+          </div>
+          <div class="card-body">
+            <p>State-of-the-art security systems and lockers to keep your belongings safe.</p>
+          </div>
+        </div>
+        
+        <div class="card animate-on-scroll">
+          <div class="card-header">
+            <i class="fas fa-calendar-alt" style="font-size: 2rem; color: var(--primary-color); margin-bottom: 1rem;"></i>
+            <h3>Flexible Booking</h3>
+          </div>
+          <div class="card-body">
+            <p>Book by the hour, day, week, or month. Pay only for what you use with our flexible plans.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT SECTION -->
+  <section class="about">
+    <h2>Why Choose StudySit?</h2>
+    <p>Whether you're a student or a growing startup, StudySit provides beautifully designed spaces, superfast Wi-Fi, great coffee, and a vibrant community of professionals. Book your seat, desk, or private office — whenever you need it.</p>
+  </section>students and professionals. Book flexible workspaces with high-speed internet, premium amenities, and vibrant community."/>
+  <meta name="keywords" content="coworking space, study space, office rental, shared workspace, student workspace, professional workspace, India"/>
+  <meta name="author" content="StudySit"/>
+  
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="StudySit - Premium Coworking Spaces"/>
+  <meta property="og:description" content="India's first hyperlocal space for students and office workers. Flexible, affordable, and community-driven."/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:image" content="./TECHNOLOGIA.jpg"/>
+  
+  <title>StudySit - Premium Coworking Spaces | Book Your Workspace Today</title>
+  
+  <!-- External CSS -->
+  <link rel="stylesheet" href="css/styles.css">
+  
+  <!-- Font Awesome for Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  
   <style>
     /* --- RESET & BASE --- */
     * {
@@ -185,21 +307,23 @@
     }
   </style>
 </head>
-<body>
+<body class="bg-image">
 
   <!-- HEADER -->
   <header>
-    <h1>Welcome to StudySit</h1>
+    <h1><i class="fas fa-laptop-code"></i> Welcome to StudySit</h1>
     <p>India's first hyperlocal space for students and office workers.</p>
   </header>
 
   <!-- NAVIGATION -->
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="about.html">About</a>
-    <a href="spaces.html">Spaces</a>
-    <a href="pricing.html">Pricing</a>
-    <a href="contact.html">Contact</a>
+  <nav id="main-nav">
+    <div class="nav-container">
+      <a href="index.html" class="active"><i class="fas fa-home"></i> Home</a>
+      <a href="about.html"><i class="fas fa-info-circle"></i> About</a>
+      <a href="spaces.html"><i class="fas fa-building"></i> Spaces</a>
+      <a href="pricing.html"><i class="fas fa-tag"></i> Pricing</a>
+      <a href="contact.html"><i class="fas fa-envelope"></i> Contact</a>
+    </div>
   </nav>
 
 
@@ -232,12 +356,108 @@
 
   <!-- FOOTER -->
   <footer>
-    <p>&copy; 2025 StudySit. All rights reserved.</p>
+    <div class="container">
+      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+        <p>&copy; 2025 StudySit. All rights reserved.</p>
+        <div>
+          <a href="https://facebook.com" style="color: white; margin: 0 0.5rem; font-size: 1.25rem;">
+            <i class="fab fa-facebook"></i>
+          </a>
+          <a href="https://twitter.com" style="color: white; margin: 0 0.5rem; font-size: 1.25rem;">
+            <i class="fab fa-twitter"></i>
+          </a>
+          <a href="https://instagram.com" style="color: white; margin: 0 0.5rem; font-size: 1.25rem;">
+            <i class="fab fa-instagram"></i>
+          </a>
+          <a href="https://linkedin.com" style="color: white; margin: 0 0.5rem; font-size: 1.25rem;">
+            <i class="fab fa-linkedin"></i>
+          </a>
+        </div>
+      </div>
+    </div>
   </footer>
 
-  
+  <!-- Include Modal Components -->
+  <div id="booking-modal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Book Your Space</h3>
+        <button class="close-modal">&times;</button>
+      </div>
+      <form id="booking-form">
+        <div class="form-group">
+          <label for="name" class="form-label">Full Name *</label>
+          <input type="text" id="name" name="name" class="form-input" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="email" class="form-label">Email Address *</label>
+          <input type="email" id="email" name="email" class="form-input" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="phone" class="form-label">Phone Number *</label>
+          <input type="tel" id="phone" name="phone" class="form-input" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="space-type" class="form-label">Space Type</label>
+          <select id="space-type" name="space-type" class="form-select" required>
+            <option value="">Select a space</option>
+            <option value="Hot Desk">Hot Desk - ₹500/day</option>
+            <option value="Dedicated Desk">Dedicated Desk - ₹1,200/day</option>
+            <option value="Private Office">Private Office - ₹3,000/day</option>
+            <option value="Meeting Room">Meeting Room - ₹800/hour</option>
+            <option value="Conference Hall">Conference Hall - ₹2,000/hour</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="date" class="form-label">Date *</label>
+          <input type="date" id="date" name="date" class="form-input" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="duration" class="form-label">Duration *</label>
+          <select id="duration" name="duration" class="form-select" required>
+            <option value="">Select duration</option>
+            <option value="Half Day (4 hours)">Half Day (4 hours)</option>
+            <option value="Full Day (8 hours)">Full Day (8 hours)</option>
+            <option value="1 Hour">1 Hour</option>
+            <option value="2 Hours">2 Hours</option>
+            <option value="4 Hours">4 Hours</option>
+            <option value="Weekly">Weekly</option>
+            <option value="Monthly">Monthly</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="special-requests" class="form-label">Special Requests</label>
+          <textarea id="special-requests" name="special-requests" class="form-textarea" 
+                    placeholder="Any special requirements or requests..."></textarea>
+        </div>
+        
+        <div class="form-group">
+          <p><strong>Selected Price: </strong><span id="selected-price">₹500</span></p>
+        </div>
+        
+        <button type="submit" class="btn btn-primary btn-lg">Book Now</button>
+      </form>
+    </div>
+  </div>
 
+  <!-- Loading Overlay -->
+  <div id="loading-overlay" class="loading-overlay">
+    <div class="loading-spinner"></div>
+  </div>
 
+  <!-- Scroll to Top Button -->
+  <button id="scroll-to-top" class="scroll-to-top">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+
+  <!-- JavaScript -->
+  <script src="js/main.js"></script>
 </body>
 </html>
 
