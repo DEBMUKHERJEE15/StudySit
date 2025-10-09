@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Seat Booking - StudySit</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 15px;
+      padding: 30px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    }
+
+    h1 { text-align: center; color: #333; margin-bottom: 30px; }
+
+    .preferences {
+      display: flex;
+      gap: 20px;
+      margin-bottom: 30px;
+      flex-wrap: wrap;
+    }
+
+    .pref-group {
+      flex: 1;
+      min-width: 200px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: 600;
+      color: #555;
+    }
+
+    select, input {
+      width: 100%;
+      padding: 10px;
+      border: 2px solid #e1e5e9;
+      border-radius: 8px;
+      font-size: 14px;
+    }
+
+    .floor-map {
+      display: grid;
+      grid-template-columns: repeat(8, 1fr);
+      gap: 10px;
+      margin: 30px 0;
+      padding: 20px;
+      background: #f8f9fa;
+      border-radius: 10px;
+    }
+
+    .seat {
+      width: 60px;
+      height: 60px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .seat:hover { transform: scale(1.1); }
+
+    .available { background: #10b981; color: white; }
+    .occupied { background: #ef4444; color: white; cursor: not-allowed; }
+    .recommended { background: #3b82f6; color: white; animation: pulse 2s infinite; }
+    .moderate { background: #f59e0b; color: white; }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+
+    .legend {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin: 20px 0;
+      flex-wrap: wrap;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .legend-color {
+      width: 20px;
+      height: 20px;
+      border-radius: 4px;
+    }
+
+    .recommendations {
+      background: #f0f9ff;
+      padding: 20px;
+      border-radius: 10px;
+      margin-top: 20px;
+    }
+
+    .rec-seat {
+      display: inline-block;
+      background: #3b82f6;
+      color: white;
+      padding: 8px 15px;
+      border-radius: 20px;
+      margin: 5px;
+      font-size: 14px;
+    }
+
+    .btn {
+      background: #10b981;
+      color: white;
+      padding: 12px 30px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      margin: 10px 5px;
+    }
+
+    .btn:hover { background: #059669; }
+
+    .amenities {
+      display: flex;
+      justify-content: space-around;
+      margin: 20px 0;
+      font-size: 12px;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🤖 AI Seat Recommendation</h1>
+    
+    <div class="preferences">
+      <div class="pref-group">
+        <label>Noise Preference</label>
+        <select id="noise">
+          <option value="quiet">Quiet Zone</option>
+          <option value="moderate">Moderate</option>
+          <option value="social">Social/Collaborative</option>
+        </select>
+      </div>
+      
+      <div class="pref-group">
+        <label>Lighting</label>
+        <select id="lighting">
+          <option value="natural">Natural Light</option>
+          <option value="bright">Bright Artificial</option>
+          <option value="dim">Dim/Cozy</option>
+        </select>
+      </div>
+      
+      <div class="pref-group">
+        <label>Duration (hours)</label>
+        <input type="number" id="duration" value="2" min="1" max="12">
+      </div>
+      
+      <div class="pref-group">
+        <label>Priority Amenity</label>
+        <select id="amenity">
+          <option value="wifi">Strong WiFi</option>
+          <option value="power">Power Outlets</option>
+          <option value="coffee">Near Coffee</option>
+          <option value="window">Window View</option>
+        </select>
+      </div>
+    </div>
+
+    <button class="btn" onclick="findRecommendations()">🎯 Find My Perfect Seat</button>
+    <button class="btn" onclick="refreshHeatMap()">🔄 Refresh Heat Map</button>
+
+    <div class="amenities">
+      <span>☕ Coffee Station</span>
+      <span>🔌 Power Hub</span>
+      <span>🪟 Window Seats</span>
+      <span>📶 WiFi Boost Zone</span>
+      <span>🤫 Silent Area</span>
+    </div>
+
+    <div class="floor-map" id="floorMap"></div>
+
+    <div class="legend">
+      <div class="legend-item">
+        <div class="legend-color available"></div>
+        <span>Available</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-color recommended"></div>
+        <span>AI Recommended</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-color moderate"></div>
+        <span>Busy Area</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-color occupied"></div>
+        <span>Occupied</span>
+      </div>
+    </div>
+
+    <div class="recommendations" id="recommendations" style="display:none;">
+      <h3>🎯 AI Recommendations for You:</h3>
+      <div id="recList"></div>
+      <p style="margin-top:10px; font-size:14px; color:#666;">
+        Based on your preferences and current occupancy patterns
+      </p>
+    </div>
+  </div>
+
+  <script>
+    // Seat data with properties
+    const seats = {
+      1: {noise: 'quiet', lighting: 'natural', amenities: ['window', 'wifi'], occupied: false},
+      2: {noise: 'quiet', lighting: 'natural', amenities: ['window'], occupied: true},
+      3: {noise: 'quiet', lighting: 'bright', amenities: ['power'], occupied: false},
+      4: {noise: 'moderate', lighting: 'bright', amenities: ['wifi'], occupied: false},
+      5: {noise: 'moderate', lighting: 'bright', amenities: ['power', 'wifi'], occupied: true},
+      6: {noise: 'social', lighting: 'bright', amenities: ['coffee'], occupied: false},
+      7: {noise: 'social', lighting: 'natural', amenities: ['coffee', 'window'], occupied: false},
+      8: {noise: 'quiet', lighting: 'dim', amenities: ['power'], occupied: false},
+      9: {noise: 'quiet', lighting: 'natural', amenities: ['window', 'power'], occupied: false},
+      10: {noise: 'moderate', lighting: 'bright', amenities: ['wifi'], occupied: true},
+      11: {noise: 'moderate', lighting: 'bright', amenities: ['power'], occupied: false},
+      12: {noise: 'social', lighting: 'bright', amenities: ['coffee', 'wifi'], occupied: false},
+      13: {noise: 'social', lighting: 'natural', amenities: ['window'], occupied: true},
+      14: {noise: 'quiet', lighting: 'dim', amenities: ['power'], occupied: false},
+      15: {noise: 'quiet', lighting: 'natural', amenities: ['window'], occupied: false},
+      16: {noise: 'moderate', lighting: 'bright', amenities: ['wifi', 'power'], occupied: false}
+    };
+
+    function renderFloorMap() {
+      const map = document.getElementById('floorMap');
+      map.innerHTML = '';
+      
+      for(let i = 1; i <= 16; i++) {
+        const seat = document.createElement('div');
+        seat.className = 'seat';
+        seat.textContent = i;
+        seat.onclick = () => bookSeat(i);
+        
+        if(seats[i].occupied) {
+          seat.classList.add('occupied');
+        } else {
+          seat.classList.add('available');
+        }
+        
+        map.appendChild(seat);
+      }
+    }
+
+    function findRecommendations() {
+      const noise = document.getElementById('noise').value;
+      const lighting = document.getElementById('lighting').value;
+      const amenity = document.getElementById('amenity').value;
+      
+      // AI scoring algorithm
+      const scores = {};
+      
+      Object.keys(seats).forEach(seatId => {
+        const seat = seats[seatId];
+        if(seat.occupied) return;
+        
+        let score = 0;
+        
+        // Preference matching
+        if(seat.noise === noise) score += 40;
+        if(seat.lighting === lighting) score += 30;
+        if(seat.amenities.includes(amenity)) score += 30;
+        
+        // Occupancy bonus (less crowded areas)
+        const nearbyOccupied = getNearbyOccupancy(parseInt(seatId));
+        score += (4 - nearbyOccupied) * 5;
+        
+        scores[seatId] = score;
+      });
+      
+      // Get top 3 recommendations
+      const recommended = Object.entries(scores)
+        .sort(([,a], [,b]) => b - a)
+        .slice(0, 3)
+        .map(([seatId]) => seatId);
+      
+      displayRecommendations(recommended);
+      highlightRecommended(recommended);
+    }
+
+    function getNearbyOccupancy(seatId) {
+      const nearby = [seatId-1, seatId+1, seatId-8, seatId+8];
+      return nearby.filter(id => seats[id] && seats[id].occupied).length;
+    }
+
+    function displayRecommendations(recommended) {
+      const recDiv = document.getElementById('recommendations');
+      const recList = document.getElementById('recList');
+      
+      recList.innerHTML = recommended.map(seatId => 
+        `<span class="rec-seat">Seat ${seatId} (${Math.floor(Math.random()*20+80)}% match)</span>`
+      ).join('');
+      
+      recDiv.style.display = 'block';
+    }
+
+    function highlightRecommended(recommended) {
+      document.querySelectorAll('.seat').forEach(seat => {
+        seat.classList.remove('recommended');
+        if(recommended.includes(seat.textContent) && !seats[seat.textContent].occupied) {
+          seat.classList.add('recommended');
+        }
+      });
+    }
+
+    function bookSeat(seatId) {
+      if(seats[seatId].occupied) {
+        alert('Seat is occupied!');
+        return;
+      }
+      
+      if(confirm(`Book seat ${seatId}?`)) {
+        seats[seatId].occupied = true;
+        renderFloorMap();
+        alert(`Seat ${seatId} booked successfully! 🎉`);
+      }
+    }
+
+    function refreshHeatMap() {
+      // Simulate real-time updates
+      Object.keys(seats).forEach(seatId => {
+        if(Math.random() < 0.1) { // 10% chance to change status
+          seats[seatId].occupied = !seats[seatId].occupied;
+        }
+      });
+      renderFloorMap();
+    }
+
+    // Initialize
+    renderFloorMap();
+    
+    // Auto-refresh every 30 seconds
+    setInterval(refreshHeatMap, 30000);
+  </script>
+</body>
+</html>
