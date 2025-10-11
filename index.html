@@ -1,254 +1,148 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>CoWorkHub - Home</title>
-  <style>
-    /* --- RESET & BASE --- */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #f9fafb;
-      color: green;
-      overflow-x: hidden;
-    }
-    body {
-  background-image: url('TECHNOLOGIA.jpg');
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
-}
-
-
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
-
-    img {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
-
-    /* --- HEADER --- */
-    header {
-      background-color: #1f2937;
-      color: white;
-      padding: 20px 0;
-      text-align: center;
-    }
-
-    nav {
-      background-color: #374151;
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      padding: 15px 0;
-    }
-
-    nav a {
-      color: #fff;
-      font-weight: 500;
-      transition: color 0.3s;
-    }
-
-    nav a:hover {
-      color: #10b981;
-    }
-
-    /* --- HERO SLIDER --- */
-    .slider {
-      position: relative;
-      overflow: hidden;
-      max-height: 500px;
-    }
-
-    .slides {
-      display: flex;
-      transition: transform 0.8s ease-in-out;
-    }
-
-    .slide {
-      min-width: 100%;
-      transition: opacity 0.8s ease-in-out;
-    }
-
-    .slider-buttons {
-      position: absolute;
-      top: 50%;
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-      transform: translateY(-50%);
-      padding: 0 20px;
-    }
-
-    .slider-buttons button {
-      background: rgba(0, 0, 0, 0.5);
-      color: white;
-      border: none;
-      font-size: 24px;
-      padding: 10px 15px;
-      cursor: pointer;
-      border-radius: 50%;
-    }
-
-    /* --- ABOUT SECTION --- */
-    .about {
-      max-width: 1100px;
-      margin: 60px auto;
-      padding: 0 20px;
-      text-align: center;
-      animation: fadeIn 1.2s ease-in-out;
-    }
-
-    .about h2 {
-      font-size: 2.2rem;
-      margin-bottom: 20px;
-    }
-
-    .about p {
-      font-size: 1.1rem;
-      color: white;
-    }
-
-    /* --- REVIEWS SECTION --- */
-    .reviews {
-      background-color: #e0f2f1;
-      padding: 60px 20px;
-    }
-
-    .reviews h2 {
-      text-align: center;
-      font-size: 2rem;
-      margin-bottom: 40px;
-    }
-
-    .review-cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 30px;
-      max-width: 1100px;
-      margin: 0 auto;
-      animation: fadeInUp 1.2s ease-in-out;
-    }
-
-    .review {
-      background: white;
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
-    }
-
-    .review p {
-      color: #374151;
-      font-size: 0.95rem;
-    }
-
-    .review .author {
-      margin-top: 15px;
-      font-weight: bold;
-      color: #10b981;
-    }
-
-    footer {
-      background-color: #1f2937;
-      color: white;
-      text-align: center;
-      padding: 20px 0;
-      margin-top: 40px;
-    }
-
-    /* --- ANIMATIONS --- */
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(60px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @media (max-width: 600px) {
-      .slider-buttons button {
-        font-size: 18px;
-        padding: 8px;
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>StudySit - Find Your Perfect Workspace</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://kit.fontawesome.com/a2e0e6c6f5.js" crossorigin="anonymous"></script>
+    <style>
+      html {
+        scroll-behavior: smooth;
       }
-    }
-  </style>
-</head>
-<body>
+      .fade {
+        animation: fade 1.2s ease-in-out;
+      }
+      @keyframes fade {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+    </style>
+  </head>
+  <body class="font-inter text-gray-800 bg-gray-50">
 
-  <!-- HEADER -->
-  <header>
-    <h1>Welcome to StudySit</h1>
-    <p>India's first hyperlocal space for students and office workers.</p>
-  </header>
-
-  <!-- NAVIGATION
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="about.html">About</a>
-    <a href="spaces.html">Spaces</a>
-    <a href="pricing.html">Pricing</a>
-    <a href="contact.html">Contact</a>
-  </nav> -->
-
-  <!-- NAVIGATION -->
-<nav>
-  <a href="index.html">Home</a>
-  <a href="about.html">About</a>
-  <a href="spaces.html">Spaces</a>
-  <a href="pricing.html">Pricing</a>
-  <a href="contact.html">Contact</a>
-  <a href="pricing.html#plans">Book Now</a> <!-- NEW BUTTON -->
-  <a href="faq.html">FAQ</a>
-</nav>
-
-  <!-- ABOUT SECTION -->
-  <section class="about">
-    <h2>Why Choose StudySit?</h2>
-    <p>Whether you’re a student or a growing startup, StudySit provides beautifully designed spaces, superfast Wi-Fi, great coffee, and a vibrant community of professionals. Book your seat, desk, or private office — whenever you need it.</p>
-  </section>
-
-  <!-- REVIEWS SECTION -->
-  <section class="reviews">
-    <h2>What Our Members Say</h2>
-    <div class="review-cards">
-      <div class="review">
-        <p>"I love the energy here! It’s the perfect balance of quiet and collaborative. Plus, the coffee is awesome!"</p>
-        <div class="author">– Sarah T.</div>
+    <!-- NAVIGATION -->
+    <nav class="fixed w-full top-0 z-50 bg-gray-900/80 backdrop-blur-sm text-white">
+      <div class="max-w-7xl mx-auto flex justify-between items-center px-6 py-4">
+        <a href="index.html" class="text-2xl font-bold tracking-tight text-emerald-400">StudySit</a>
+        <div class="hidden md:flex space-x-8 text-sm font-medium">
+          <a href="index.html" class="hover:text-emerald-400 transition">Home</a>
+          <a href="about.html" class="hover:text-emerald-400 transition">About</a>
+          <a href="spaces.html" class="hover:text-emerald-400 transition">Spaces</a>
+          <a href="pricing.html" class="hover:text-emerald-400 transition">Pricing</a>
+          <a href="contact.html" class="hover:text-emerald-400 transition">Contact</a>
+          <a href="faq.html" class="hover:text-emerald-400 transition">FAQ</a>
+        </div>
+        <a href="pricing.html#plans" class="hidden md:inline-block bg-emerald-500 hover:bg-emerald-600 px-5 py-2 rounded-full text-sm font-semibold transition">Book Now</a>
       </div>
-      <div class="review">
-        <p>"Our team switched to StudySit and productivity went through the roof. The private office is just what we needed."</p>
-        <div class="author">– David R.</div>
+    </nav>
+
+    <!-- HERO SLIDER -->
+    <section class="relative h-[90vh] overflow-hidden">
+      <div class="absolute inset-0 flex transition-transform duration-[1500ms] ease-in-out" id="slider">
+        <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c" class="w-full object-cover flex-shrink-0" alt="">
+        <img src="https://images.unsplash.com/photo-1573164574394-8d6e4bede49f" class="w-full object-cover flex-shrink-0" alt="">
+        <img src="https://images.unsplash.com/photo-1522199710521-72d69614c702" class="w-full object-cover flex-shrink-0" alt="">
       </div>
-      <div class="review">
-        <p>"I only need a desk a few days a week and StudySit gives me that flexibility. Super easy to book!"</p>
-        <div class="author">– Amina K.</div>
+      <div class="absolute inset-0 bg-black/60"></div>
+
+      <div class="absolute inset-0 flex flex-col justify-center items-center text-center text-white px-6 fade">
+        <h1 class="text-4xl sm:text-6xl font-extrabold leading-tight mb-4">
+          Work, Study & Grow — <br class="hidden sm:block" /> All in One Place
+        </h1>
+        <p class="text-lg sm:text-xl text-gray-200 max-w-xl mb-8">
+          Discover beautiful, high-speed workspaces designed for productivity and connection.
+        </p>
+        <div>
+          <a href="pricing.html#plans" class="bg-emerald-500 hover:bg-emerald-600 px-8 py-3 rounded-full font-semibold transition text-lg">Get Started</a>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  
+    <!-- FEATURES -->
+    <section class="max-w-6xl mx-auto px-6 py-24 text-center">
+      <h2 class="text-3xl sm:text-4xl font-bold mb-12 text-gray-900">Why Choose StudySit?</h2>
 
-  <!-- FOOTER -->
-  <footer>
-    <p>&copy; 2025 StudySit. All rights reserved.</p>
-  </footer>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-10">
+        <div class="bg-white shadow-lg hover:shadow-2xl transition rounded-xl p-8 fade">
+          <i class="fas fa-wifi text-emerald-500 text-5xl mb-5"></i>
+          <h3 class="text-xl font-semibold mb-2">Lightning-Fast Wi-Fi</h3>
+          <p class="text-gray-600">Stay connected with secure, high-speed internet in every workspace.</p>
+        </div>
+        <div class="bg-white shadow-lg hover:shadow-2xl transition rounded-xl p-8 fade">
+          <i class="fas fa-mug-hot text-emerald-500 text-5xl mb-5"></i>
+          <h3 class="text-xl font-semibold mb-2">Unlimited Coffee</h3>
+          <p class="text-gray-600">Keep your focus sharp with free premium coffee and tea anytime.</p>
+        </div>
+        <div class="bg-white shadow-lg hover:shadow-2xl transition rounded-xl p-8 fade">
+          <i class="fas fa-users text-emerald-500 text-5xl mb-5"></i>
+          <h3 class="text-xl font-semibold mb-2">Vibrant Community</h3>
+          <p class="text-gray-600">Collaborate, learn, and grow with like-minded students and creators.</p>
+        </div>
+        <div class="bg-white shadow-lg hover:shadow-2xl transition rounded-xl p-8 fade">
+          <i class="fas fa-chair text-emerald-500 text-5xl mb-5"></i>
+          <h3 class="text-xl font-semibold mb-2">Flexible Seating</h3>
+          <p class="text-gray-600">Choose your comfort zone — quiet zones, lounges, or team tables.</p>
+        </div>
+        <div class="bg-white shadow-lg hover:shadow-2xl transition rounded-xl p-8 fade">
+          <i class="fas fa-plug text-emerald-500 text-5xl mb-5"></i>
+          <h3 class="text-xl font-semibold mb-2">Always Powered</h3>
+          <p class="text-gray-600">Never worry about charging — every seat comes with a power port.</p>
+        </div>
+        <div class="bg-white shadow-lg hover:shadow-2xl transition rounded-xl p-8 fade">
+          <i class="fas fa-calendar-check text-emerald-500 text-5xl mb-5"></i>
+          <h3 class="text-xl font-semibold mb-2">Easy Booking</h3>
+          <p class="text-gray-600">Reserve your space in seconds using our simple online booking system.</p>
+        </div>
+      </div>
+    </section>
 
-  
+    <!-- TESTIMONIALS -->
+    <section class="bg-gradient-to-r from-emerald-50 to-teal-50 py-20">
+      <h2 class="text-center text-3xl font-bold mb-12 text-gray-900">What Our Members Say</h2>
+      <div class="max-w-6xl mx-auto px-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-10">
+        <div class="bg-white p-8 rounded-2xl shadow hover:shadow-xl transition transform hover:-translate-y-1 fade">
+          <p class="italic text-gray-700">"StudySit completely changed how I study — quiet, inspiring, and full of energy."</p>
+          <div class="mt-4 font-semibold text-emerald-600">– Aisha R.</div>
+        </div>
+        <div class="bg-white p-8 rounded-2xl shadow hover:shadow-xl transition transform hover:-translate-y-1 fade">
+          <p class="italic text-gray-700">"The private cabins helped our team focus better than ever. Highly recommend!"</p>
+          <div class="mt-4 font-semibold text-emerald-600">– Ravi S.</div>
+        </div>
+        <div class="bg-white p-8 rounded-2xl shadow hover:shadow-xl transition transform hover:-translate-y-1 fade">
+          <p class="italic text-gray-700">"Affordable, fast Wi-Fi, great coffee — what else do you need to crush your goals?"</p>
+          <div class="mt-4 font-semibold text-emerald-600">– Mehul G.</div>
+        </div>
+      </div>
+    </section>
 
+    <!-- CTA SECTION -->
+    <section class="bg-gradient-to-r from-emerald-500 to-teal-500 text-white text-center py-20">
+      <h2 class="text-4xl font-bold mb-4">Find Your Perfect Study Space</h2>
+      <p class="text-lg text-emerald-100 mb-8">Flexible plans, inspiring environments, and endless possibilities.</p>
+      <a href="pricing.html#plans" class="bg-white text-emerald-600 px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition text-lg">Explore Plans</a>
+    </section>
 
-</body>
+    <!-- FOOTER -->
+    <footer class="bg-gray-900 text-gray-400 py-10">
+      <div class="max-w-6xl mx-auto px-6 text-center">
+        <p class="text-sm">&copy; 2025 StudySit. All rights reserved.</p>
+        <div class="mt-5 flex justify-center gap-6 text-xl">
+          <a href="#" class="hover:text-emerald-400"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="hover:text-emerald-400"><i class="fab fa-linkedin"></i></a>
+          <a href="#" class="hover:text-emerald-400"><i class="fab fa-x-twitter"></i></a>
+        </div>
+      </div>
+    </footer>
+
+    <!-- SIMPLE JS SLIDER -->
+    <script>
+      const slider = document.getElementById("slider");
+      let index = 0;
+      setInterval(() => {
+        index = (index + 1) % 3;
+        slider.style.transform = `translateX(-${index * 100}%)`;
+      }, 4000);
+    </script>
+  </body>
 </html>
-
-
