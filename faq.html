@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FAQ - StudySit</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-image: url('TECHNOLOGIA.jpg');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      margin: 0;
+      color: white;
+    }
+
+    header {
+      background-color: #1f2937;
+      text-align: center;
+      padding: 30px 0;
+      color: white;
+    }
+
+    nav {
+      background-color: #374151;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      padding: 15px 0;
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: #10b981;
+    }
+
+    .faq-container {
+      max-width: 900px;
+      margin: 50px auto;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      padding: 30px;
+      backdrop-filter: blur(5px);
+    }
+
+    .faq-container h2 {
+      text-align: center;
+      color: #10b981;
+      margin-bottom: 30px;
+      font-size: 2em;
+    }
+
+    .faq-item {
+      border-bottom: 1px solid #555;
+      margin-bottom: 15px;
+    }
+
+    .faq-question {
+      background: none;
+      color: #fff;
+      border: none;
+      outline: none;
+      width: 100%;
+      text-align: left;
+      padding: 15px;
+      font-size: 1.1em;
+      cursor: pointer;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    .faq-question:hover {
+      color: #10b981;
+    }
+
+    .faq-answer {
+      display: none;
+      padding: 0 15px 15px;
+      font-size: 1em;
+      color: #e5e7eb;
+    }
+
+    .faq-item.active .faq-answer {
+      display: block;
+      animation: fadeIn 0.4s ease-in-out;
+    }
+
+    footer {
+      background-color: #1f2937;
+      text-align: center;
+      color: white;
+      padding: 20px 0;
+      margin-top: 40px;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Frequently Asked Questions</h1>
+    <p>Find answers to the most common questions about StudySit.</p>
+  </header>
+
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="spaces.html">Spaces</a>
+    <a href="pricing.html">Pricing</a>
+    <a href="contact.html">Contact</a>
+    <a href="faq.html">FAQ</a>
+  </nav>
+
+  <section class="faq-container">
+    <h2>Got Questions? We’ve Got Answers!</h2>
+
+    <div class="faq-item">
+      <button class="faq-question">1. What is StudySit?</button>
+      <div class="faq-answer">StudySit is a modern co-working and study space designed for students, freelancers, and professionals. You can book seats, desks, or private offices on an hourly, weekly, or monthly basis at your convenience.</div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">2. How do I book a workspace?</button>
+      <div class="faq-answer">You can easily book your seat or office through our website using the “Book Now” button. It redirects you to our Google Form for quick registration and confirmation.</div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">3. Are there hourly or monthly passes available?</button>
+      <div class="faq-answer">Yes, StudySit offers flexible pricing plans such as hourly, weekly, and monthly passes depending on your needs.</div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">4. What amenities are included with my booking?</button>
+      <div class="faq-answer">All members enjoy superfast Wi-Fi, comfortable seating, charging points, air conditioning, coffee & refreshments, and a community-driven environment that fosters focus and collaboration.</div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">5. Can I bring food or beverages?</button>
+      <div class="faq-answer">Yes, you can bring your own snacks and beverages. We also have an in-house café serving coffee and refreshments.</div>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 StudySit. All rights reserved.</p>
+  </footer>
+
+  <script>
+    const faqItems = document.querySelectorAll('.faq-item');
+    faqItems.forEach(item => {
+      item.querySelector('.faq-question').addEventListener('click', () => {
+        item.classList.toggle('active');
+      });
+    });
+  </script>
+
+</body>
+</html>
+

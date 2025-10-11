@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Contact Us - CoWorkHub</title>
     <link rel="stylesheet" href="style.css" />
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <style>
       body {
         margin: 0;
@@ -121,6 +124,7 @@
         height: 100%;
         z-index: 1;
         overflow: hidden;
+        pointer-events: none; 
       }
 
       .shape {
@@ -206,7 +210,8 @@
       <a href="spaces.html">Spaces</a>
       <a href="pricing.html">Pricing</a>
       <a href="contact.html">Contact</a>
-      <a href="pricing.html#plans">Book Now</a>
+      <a href="pricing.html#plans">Book Now</a> <!-- NEW -->
+      <a href="faq.html">FAQ</a>
     </nav>
 
     <div class="contact-section">
@@ -255,12 +260,25 @@
           errors.push("Message must be at least 20 characters.");
 
         if (errors.length > 0) {
-          alert(errors.join("\n"));
-          return false;
+            // Show validation errors as a SweetAlert
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                html: errors.join("<br>"),
+                confirmButtonColor: '#dc3545'
+            });
+            return false;
         }
 
-        alert("Form submitted successfully!");
-        form.reset();
+        // Show success message as a SweetAlert
+        Swal.fire({
+            icon: 'success',
+            title: 'Message Sent!',
+            text: 'Thank you for contacting us. We will be in touch shortly.',
+            confirmButtonColor: '#10b981' 
+        });
+
+form.reset();
       });
     </script>
   </body>
