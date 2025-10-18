@@ -1,0 +1,78 @@
+<!-- Booking Modal -->
+<div id="booking-modal" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3>Book Your Space</h3>
+      <button class="close-modal">&times;</button>
+    </div>
+    <form id="booking-form">
+      <div class="form-group">
+        <label for="name" class="form-label">Full Name *</label>
+        <input type="text" id="name" name="name" class="form-input" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="email" class="form-label">Email Address *</label>
+        <input type="email" id="email" name="email" class="form-input" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="phone" class="form-label">Phone Number *</label>
+        <input type="tel" id="phone" name="phone" class="form-input" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="space-type" class="form-label">Space Type</label>
+        <select id="space-type" name="space-type" class="form-select" required>
+          <option value="">Select a space</option>
+          <option value="Hot Desk">Hot Desk - ₹500/day</option>
+          <option value="Dedicated Desk">Dedicated Desk - ₹1,200/day</option>
+          <option value="Private Office">Private Office - ₹3,000/day</option>
+          <option value="Meeting Room">Meeting Room - ₹800/hour</option>
+          <option value="Conference Hall">Conference Hall - ₹2,000/hour</option>
+        </select>
+      </div>
+      
+      <div class="form-group">
+        <label for="date" class="form-label">Date *</label>
+        <input type="date" id="date" name="date" class="form-input" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="duration" class="form-label">Duration *</label>
+        <select id="duration" name="duration" class="form-select" required>
+          <option value="">Select duration</option>
+          <option value="Half Day (4 hours)">Half Day (4 hours)</option>
+          <option value="Full Day (8 hours)">Full Day (8 hours)</option>
+          <option value="1 Hour">1 Hour</option>
+          <option value="2 Hours">2 Hours</option>
+          <option value="4 Hours">4 Hours</option>
+          <option value="Weekly">Weekly</option>
+          <option value="Monthly">Monthly</option>
+        </select>
+      </div>
+      
+      <div class="form-group">
+        <label for="special-requests" class="form-label">Special Requests</label>
+        <textarea id="special-requests" name="special-requests" class="form-textarea" 
+                  placeholder="Any special requirements or requests..."></textarea>
+      </div>
+      
+      <div class="form-group">
+        <p><strong>Selected Price: </strong><span id="selected-price">₹500</span></p>
+      </div>
+      
+      <button type="submit" class="btn btn-primary btn-lg">Book Now</button>
+    </form>
+  </div>
+</div>
+
+<!-- Loading Overlay -->
+<div id="loading-overlay" class="loading-overlay">
+  <div class="loading-spinner"></div>
+</div>
+
+<!-- Scroll to Top Button -->
+<button id="scroll-to-top" class="scroll-to-top">
+  ↑
+</button>
