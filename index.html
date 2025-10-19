@@ -50,8 +50,8 @@
 
         @media (max-width: 768px) {
         #mobileNav {
-            width: 50% !important;
-            max-width: 200px;
+            width: 100% !important;
+            max-width: 400px;
             position: absolute;
             right: 0;
             top: 100%;
@@ -67,6 +67,110 @@
             pointer-events: all;
         }
     }
+    /* General Reset */
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Navbar Base Styles */
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 20px;
+  background-color: #374151;
+  color: #fff;
+  position: relative;
+}
+
+.nav-brand {
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #fff;
+}
+
+.nav-links {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+}
+
+.nav-links a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.nav-toggle {
+  display: none;
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+/* Hero fix (avoid overflow) */
+.hero {
+  background-size: cover;
+  background-position: center;
+  background-attachment: scroll; /* prevent mobile lag */
+}
+
+/* Chat widget fix */
+.chatbot {
+  width: 90%;
+  max-width: 320px;
+  margin: 12px auto;
+}
+
+/* ========== MOBILE VIEW ========== */
+@media (max-width: 768px) {
+  /* show hamburger */
+  .nav-toggle {
+    display: block;
+  }
+
+  /* hide nav links by default */
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    background-color: #374151;
+    width: 100%;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    padding: 10px 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  .nav-links a {
+    padding: 10px 16px;
+  }
+
+  /* open state */
+  .nav-links.open {
+    display: flex;
+  }
+
+  /* fix hero */
+  .hero {
+    padding: 60px 16px;
+  }
+
+  /* stack any side-by-side layouts */
+  .two-column, .review-cards {
+    display: block;
+  }
+}
+
 
 /* Desktop Navbar Hover Animations - Enhanced */
 @media (min-width: 768px) {
@@ -116,30 +220,25 @@
 
 <!-- HEADER & NAVIGATION -->
 <header class="fixed top-0 w-full bg-study-bg/95 backdrop-blur-sm shadow-sm transition-all duration-300 z-50">
-    <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-        <a href="index.html" class="text-2xl font-bold text-study-text">StudySit</a>
-        
-        <!-- Desktop Navigation (hidden on mobile) -->
-<div class="hidden md:flex items-center space-x-2">
-    <a href="index.html" class="nav-link-item text-study-text hover:text-study-text transition-colors duration-200">
-        <span>Home</span>
-    </a>
-    <a href="about.html" class="nav-link-item text-study-text hover:text-study-text transition-colors duration-200">
-        <span>About</span>
-    </a>
-    <a href="spaces.html" class="nav-link-item text-study-text hover:text-study-text transition-colors duration-200">
-        <span>Spaces</span>
-    </a>
-    <a href="pricing.html" class="nav-link-item text-study-text hover:text-study-text transition-colors duration-200">
-        <span>Pricing</span>
-    </a>
-    <a href="contact.html" class="nav-link-item text-study-text hover:text-study-text transition-colors duration-200">
-        <span>Contact</span>
-    </a>
+<!-- Responsive Navbar -->
+<nav class="nav">
+  <div class="nav-brand">StudySit</div>
+
+  <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+    <span class="nav-toggle-icon">☰</span>
+  </button>
+
+  <div class="nav-links" id="nav-links">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="spaces.html">Spaces</a>
+    <a href="pricing.html">Pricing</a>
+    <a href="contact.html">Contact</a>
     <a href="faq.html" class="nav-link-item text-study-text hover:text-study-text transition-colors duration-200">
         <span>FAQ</span>
     </a>
 </div>
+</nav>
 
         <!-- Right side buttons -->
         <div class="flex items-center space-x-4">
@@ -276,6 +375,22 @@
             }, 300);
         }
     });
+
+  const btn = document.querySelector('.nav-toggle');
+  const links = document.getElementById('nav-links');
+
+  btn.addEventListener('click', () => {
+    const expanded = btn.getAttribute('aria-expanded') === 'true';
+    btn.setAttribute('aria-expanded', String(!expanded));
+    links.classList.toggle('open');
+  });
+
+  links.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      links.classList.remove('open');
+      btn.setAttribute('aria-expanded', 'false');
+    });
+  });
 </script>
 
 </body>
