@@ -1,170 +1,320 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>FAQ - StudySit</title>
-  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            "study-bg": "var(--color-background-primary)",
+            "study-card": "var(--color-background-secondary)",
+            "study-text": "var(--color-text-primary)",
+            "study-accent-cta": "var(--color-accent-cta)",
+            "study-accent-secondary": "var(--color-accent-secondary)",
+            "study-border": "var(--color-border)",
+          },
+          keyframes: {
+            "fade-slide-up": {
+              "0%": { opacity: "0", transform: "translateY(1rem)" },
+              "100%": { opacity: "1", transform: "translateY(0)" },
+            },
+          },
+          animation: {
+            "fade-slide-up": "fade-slide-up 0.8s ease-out forwards",
+          }
+        },
+      },
+      darkMode: "class",
+      plugins: [],
+    }
+  </script>
   <style>
+    :root {
+      --color-background-primary: #FFFFFF;
+      --color-background-secondary: #F8F8F8;
+      --color-text-primary: #333333;
+      --color-accent-cta: #FFC72C;
+      --color-accent-secondary: #A9B497;
+      --color-border: #E0E0E0;
+    }
+    .dark {
+      --color-background-primary: #121212;
+      --color-background-secondary: #1E1E1E;
+      --color-text-primary: #F5F5F5;
+      --color-border: #3A3A3A;
+    }
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-image: url('TECHNOLOGIA.jpg');
-      background-size: cover;
-      background-position: center;
-      background-attachment: fixed;
-      margin: 0;
-      color: white;
+        background-color: var(--color-background-primary);
+        color: var(--color-text-primary);
+    }
+    details > summary::-webkit-details-marker {
+        display: none;
     }
 
-    header {
-      background-color: #1f2937;
-      text-align: center;
-      padding: 30px 0;
-      color: white;
+    @media (max-width: 768px) {
+    #mobileNav {
+        width: 50% !important;
+        max-width: 200px;
+        position: absolute;
+        right: 0;
+        top: 100%;
+        transform: translateY(-20px);
+        opacity: 0;
+        transition: all 0.3s ease-in-out;
+        pointer-events: none;
     }
+    
+    #mobileNav.show {
+        transform: translateY(0);
+        opacity: 1;
+        pointer-events: all;
+    }
+}
 
-    nav {
-      background-color: #374151;
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      padding: 15px 0;
+/* Desktop Navbar Hover Animations - Enhanced */
+@media (min-width: 768px) {
+    .nav-link-item {
+        position: relative;
+        overflow: hidden;
+        padding: 10px 20px; /* Increased padding for bigger oval */
+        border-radius: 25px; /* More rounded for bigger oval */
+        transition: all 0.3s ease-in-out;
+        z-index: 1;
     }
-
-    nav a {
-      color: #fff;
-      text-decoration: none;
-      font-weight: 500;
-      transition: color 0.3s;
+    
+    .nav-link-item::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: var(--color-accent-cta); /* Your yellow color */
+        border-radius: 25px; /* Match the increased border radius */
+        transition: left 0.3s ease-in-out;
+        z-index: -1;
     }
-
-    nav a:hover {
-      color: #10b981;
+    
+    .nav-link-item:hover::before {
+        left: 0;
     }
-
-    .faq-container {
-      max-width: 900px;
-      margin: 50px auto;
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 10px;
-      padding: 30px;
-      backdrop-filter: blur(5px);
+    
+    .nav-link-item:hover {
+        color: var(--color-text-primary);
+        transform: translateY(-2px);
+        font-weight: 700 !important; /* Make text bold on hover */
     }
-
-    .faq-container h2 {
-      text-align: center;
-      color: #10b981;
-      margin-bottom: 30px;
-      font-size: 2em;
+    
+    /* Ensure text stays on top of the oval */
+    .nav-link-item span {
+        position: relative;
+        z-index: 2;
     }
-
-    .faq-item {
-      border-bottom: 1px solid #555;
-      margin-bottom: 15px;
-    }
-
-    .faq-question {
-      background: none;
-      color: #fff;
-      border: none;
-      outline: none;
-      width: 100%;
-      text-align: left;
-      padding: 15px;
-      font-size: 1.1em;
-      cursor: pointer;
-      font-weight: 500;
-      transition: color 0.3s ease;
-    }
-
-    .faq-question:hover {
-      color: #10b981;
-    }
-
-    .faq-answer {
-      display: none;
-      padding: 0 15px 15px;
-      font-size: 1em;
-      color: #e5e7eb;
-    }
-
-    .faq-item.active .faq-answer {
-      display: block;
-      animation: fadeIn 0.4s ease-in-out;
-    }
-
-    footer {
-      background-color: #1f2937;
-      text-align: center;
-      color: white;
-      padding: 20px 0;
-      margin-top: 40px;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(-10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+}
   </style>
 </head>
-<body>
+<body class="bg-study-bg text-study-text">
 
-  <header>
-    <h1>Frequently Asked Questions</h1>
-    <p>Find answers to the most common questions about StudySit.</p>
-  </header>
+ <!-- HEADER & NAVIGATION -->
+<header class="fixed top-0 w-full bg-study-bg/95 backdrop-blur-sm shadow-sm transition-all duration-300 z-50">
+    <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+        <a href="index.html" class="text-2xl font-bold text-study-text">StudySit</a>
+        
+        <!-- Desktop Navigation (hidden on mobile) -->
+<div class="hidden md:flex items-center space-x-2">
+    <a href="index.html" class="nav-link-item text-study-text hover:text-study-text transition-colors duration-200">
+        <span>Home</span>
+    </a>
+    <a href="about.html" class="nav-link-item text-study-text hover:text-study-text transition-colors duration-200">
+        <span>About</span>
+    </a>
+    <a href="spaces.html" class="nav-link-item text-study-text hover:text-study-text transition-colors duration-200">
+        <span>Spaces</span>
+    </a>
+    <a href="pricing.html" class="nav-link-item text-study-text hover:text-study-text transition-colors duration-200">
+        <span>Pricing</span>
+    </a>
+    <a href="contact.html" class="nav-link-item text-study-text hover:text-study-text transition-colors duration-200">
+        <span>Contact</span>
+    </a>
+    <a href="faq.html" class="nav-link-item text-study-text hover:text-study-text transition-colors duration-200">
+        <span>FAQ</span>
+    </a>
+</div>
 
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="about.html">About</a>
-    <a href="spaces.html">Spaces</a>
-    <a href="pricing.html">Pricing</a>
-    <a href="contact.html">Contact</a>
-    <a href="faq.html">FAQ</a>
-  </nav>
+        <!-- Right side buttons -->
+        <div class="flex items-center space-x-4">
+            <!-- Book Now button -->
+            <a href="pricing.html#plans" class="bg-study-accent-cta text-study-text px-4 py-2 rounded-lg font-semibold hover:bg-opacity-90 transition-all duration-200 active:scale-95">Book Now</a>
+            
+            <!-- Mobile menu button - Changed to yellow -->
+            <button class="md:hidden bg-study-accent-cta text-study-text p-2 rounded-lg" id="mobileMenuBtn">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+            
+            <!-- Theme toggle -->
+            <button id="theme-toggle" class="p-2 rounded-full transition-colors duration-200 hover:bg-study-accent-secondary/20">
+                <svg id="theme-toggle-dark-icon" class="h-6 w-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9.003 9.003 0 0015 3a9 9 0 00-9 9c0 4.223 2.91 7.82 6.873 8.783.5.093.5-.213.5-.474V19.5a.5.5 0 00-.5-.5 8.5 8.5 0 01-8.5-8.5 8.5 8.5 0 0110.158-8.135 1 1 0 001.079.136A8.5 8.5 0 0122 10.5c0 1.252-.267 2.44-.736 3.522a.5.5 0 00.182.635l2.518 1.708a.5.5 0 00.69-.635z"/>
+                </svg>
+                <svg id="theme-toggle-light-icon" class="h-6 w-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M12 5a7 7 0 100 14 7 7 0 000-14z"/>
+                </svg>
+            </button>
+        </div>
+    </nav>
 
-  <section class="faq-container">
-    <h2>Got Questions? We’ve Got Answers!</h2>
-
-    <div class="faq-item">
-      <button class="faq-question">1. What is StudySit?</button>
-      <div class="faq-answer">StudySit is a modern co-working and study space designed for students, freelancers, and professionals. You can book seats, desks, or private offices on an hourly, weekly, or monthly basis at your convenience.</div>
+<!-- Mobile Navigation Menu - Fixed to show properly -->
+<div class="md:hidden hidden bg-study-accent-cta shadow-lg" id="mobileNav" style="width: 50%; max-width: 200px; position: absolute; right: 0; top: 100%;">
+    <div class="container mx-auto px-6 py-6 flex flex-col space-y-4">
+        <a href="index.html" class="text-study-text font-semibold hover:bg-study-bg/20 py-3 px-4 rounded-lg transition-all duration-200">Home</a>
+        <a href="about.html" class="text-study-text font-semibold hover:bg-study-bg/20 py-3 px-4 rounded-lg transition-all duration-200">About</a>
+        <a href="spaces.html" class="text-study-text font-semibold hover:bg-study-bg/20 py-3 px-4 rounded-lg transition-all duration-200">Spaces</a>
+        <a href="pricing.html" class="text-study-text font-semibold hover:bg-study-bg/20 py-3 px-4 rounded-lg transition-all duration-200">Pricing</a>
+        <a href="contact.html" class="text-study-text font-semibold hover:bg-study-bg/20 py-3 px-4 rounded-lg transition-all duration-200">Contact</a>
+        <a href="faq.html" class="text-study-text font-semibold hover:bg-study-bg/20 py-3 px-4 rounded-lg transition-all duration-200">FAQ</a>
+        <!-- Book Now in mobile menu -->
+        <a href="pricing.html#plans" class="bg-study-bg text-study-text font-semibold py-3 px-4 rounded-lg text-center hover:bg-opacity-90 transition-all duration-200 active:scale-95 mt-4">Book Now</a>
     </div>
+</div>
+</header>
 
-    <div class="faq-item">
-      <button class="faq-question">2. How do I book a workspace?</button>
-      <div class="faq-answer">You can easily book your seat or office through our website using the “Book Now” button. It redirects you to our Google Form for quick registration and confirmation.</div>
+  <!-- MAIN CONTENT -->
+  <main class="pt-24">
+    <section class="container mx-auto px-6 py-12">
+      <header class="text-center mb-16">
+        <h1 class="text-5xl md:text-6xl font-bold text-study-text animate-fade-slide-up opacity-0">Frequently Asked Questions</h1>
+        <p class="mt-4 text-lg text-study-text/80 animate-fade-slide-up opacity-0" style="animation-delay: 200ms;">Find answers to common questions about StudySit.</p>
+      </header>
+
+      <div class="max-w-3xl mx-auto space-y-4">
+        
+        <details class="bg-study-card rounded-lg border border-study-border transition-all duration-300 animate-fade-slide-up opacity-0" style="animation-delay: 400ms;">
+          <summary class="p-6 cursor-pointer font-semibold text-lg list-none flex justify-between items-center">
+            1. What is StudySit?
+            <span class="text-study-accent-cta transform transition-transform duration-300 group-open:rotate-45">+</span>
+          </summary>
+          <div class="px-6 pb-6 text-study-text/80">
+            StudySit is a modern co-working and study space designed for students, freelancers, and professionals. You can book seats, desks, or private offices on an hourly, weekly, or monthly basis at your convenience.
+          </div>
+        </details>
+
+        <details class="bg-study-card rounded-lg border border-study-border transition-all duration-300 animate-fade-slide-up opacity-0" style="animation-delay: 500ms;">
+          <summary class="p-6 cursor-pointer font-semibold text-lg list-none flex justify-between items-center">
+            2. How do I book a workspace?
+            <span class="text-study-accent-cta transform transition-transform duration-300 group-open:rotate-45">+</span>
+          </summary>
+          <div class="px-6 pb-6 text-study-text/80">
+            You can easily book your seat or office through our website using the “Book Now” button. It redirects you to our Google Form for quick registration and confirmation.
+          </div>
+        </details>
+        
+        <details class="bg-study-card rounded-lg border border-study-border transition-all duration-300 animate-fade-slide-up opacity-0" style="animation-delay: 600ms;">
+          <summary class="p-6 cursor-pointer font-semibold text-lg list-none flex justify-between items-center">
+            3. Are there hourly or monthly passes available?
+            <span class="text-study-accent-cta transform transition-transform duration-300 group-open:rotate-45">+</span>
+          </summary>
+          <div class="px-6 pb-6 text-study-text/80">
+            Yes, StudySit offers flexible pricing plans such as hourly, weekly, and monthly passes depending on your needs.
+          </div>
+        </details>
+
+        <details class="bg-study-card rounded-lg border border-study-border transition-all duration-300 animate-fade-slide-up opacity-0" style="animation-delay: 700ms;">
+          <summary class="p-6 cursor-pointer font-semibold text-lg list-none flex justify-between items-center">
+            4. What amenities are included with my booking?
+            <span class="text-study-accent-cta transform transition-transform duration-300 group-open:rotate-45">+</span>
+          </summary>
+          <div class="px-6 pb-6 text-study-text/80">
+            All members enjoy superfast Wi-Fi, comfortable seating, charging points, air conditioning, coffee & refreshments, and a community-driven environment that fosters focus and collaboration.
+          </div>
+        </details>
+
+        <details class="bg-study-card rounded-lg border border-study-border transition-all duration-300 animate-fade-slide-up opacity-0" style="animation-delay: 800ms;">
+          <summary class="p-6 cursor-pointer font-semibold text-lg list-none flex justify-between items-center">
+            5. Can I bring food or beverages?
+            <span class="text-study-accent-cta transform transition-transform duration-300 group-open:rotate-45">+</span>
+          </summary>
+          <div class="px-6 pb-6 text-study-text/80">
+            Yes, you can bring your own snacks and beverages. We also have an in-house café serving coffee and refreshments.
+          </div>
+        </details>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-study-card mt-20">
+    <div class="container mx-auto px-6 py-8 text-center text-study-text/60">
+      <p>&copy; 2025 StudySit. All rights reserved.</p>
     </div>
-
-    <div class="faq-item">
-      <button class="faq-question">3. Are there hourly or monthly passes available?</button>
-      <div class="faq-answer">Yes, StudySit offers flexible pricing plans such as hourly, weekly, and monthly passes depending on your needs.</div>
-    </div>
-
-    <div class="faq-item">
-      <button class="faq-question">4. What amenities are included with my booking?</button>
-      <div class="faq-answer">All members enjoy superfast Wi-Fi, comfortable seating, charging points, air conditioning, coffee & refreshments, and a community-driven environment that fosters focus and collaboration.</div>
-    </div>
-
-    <div class="faq-item">
-      <button class="faq-question">5. Can I bring food or beverages?</button>
-      <div class="faq-answer">Yes, you can bring your own snacks and beverages. We also have an in-house café serving coffee and refreshments.</div>
-    </div>
-  </section>
-
-  <footer>
-    <p>&copy; 2025 StudySit. All rights reserved.</p>
   </footer>
 
-  <script>
-    const faqItems = document.querySelectorAll('.faq-item');
-    faqItems.forEach(item => {
-      item.querySelector('.faq-question').addEventListener('click', () => {
-        item.classList.toggle('active');
-      });
+<script>
+    // Dark Mode Toggle
+    const themeToggle = document.getElementById("theme-toggle");
+    const darkIcon = document.getElementById("theme-toggle-dark-icon");
+    const lightIcon = document.getElementById("theme-toggle-light-icon");
+
+    // Function to set the theme
+    function setTheme(isDark) {
+        document.documentElement.classList.toggle("dark", isDark);
+        lightIcon.classList.toggle("hidden", !isDark);
+        darkIcon.classList.toggle("hidden", isDark);
+        localStorage.setItem("color-theme", isDark ? "dark" : "light");
+    }
+
+    // Initial theme check
+    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    const savedTheme = localStorage.getItem("color-theme");
+
+    setTheme(savedTheme === "dark" || (!savedTheme && prefersDark));
+
+    // Theme toggle button listener
+    themeToggle.addEventListener("click", () => {
+        setTheme(!document.documentElement.classList.contains("dark"));
     });
-  </script>
+
+    // Mobile menu toggle - WITH SMOOTH ANIMATION
+    document.getElementById('mobileMenuBtn').addEventListener('click', function() {
+        const mobileNav = document.getElementById('mobileNav');
+        
+        if (mobileNav.classList.contains('show')) {
+            // Close menu
+            mobileNav.classList.remove('show');
+            setTimeout(() => {
+                mobileNav.classList.add('hidden');
+            }, 300); // Match the transition duration
+        } else {
+            // Open menu
+            mobileNav.classList.remove('hidden');
+            // Small delay to allow display change before animation
+            setTimeout(() => {
+                mobileNav.classList.add('show');
+            }, 10);
+        }
+    });
+
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', function(event) {
+        const mobileNav = document.getElementById('mobileNav');
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        
+        if (!mobileNav.contains(event.target) && !mobileMenuBtn.contains(event.target) && mobileNav.classList.contains('show')) {
+            mobileNav.classList.remove('show');
+            setTimeout(() => {
+                mobileNav.classList.add('hidden');
+            }, 300);
+        }
+    });
+</script>
 
 </body>
 </html>
-
