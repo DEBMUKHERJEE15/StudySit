@@ -1,0 +1,62 @@
+/* responsive.css - Fix Mobile Navbar */
+
+/* 1. SHOW MOBILE MENU BUTTON */
+@media (max-width: 768px) {
+    /* Show mobile menu button */
+    .md\\:flex {
+        display: none !important;
+    }
+    
+    /* Add hamburger menu */
+    .mobile-menu-btn {
+        display: block !important;
+        background: transparent;
+        border: none;
+        color: var(--study-text);
+        font-size: 1.5rem;
+        padding: 8px;
+    }
+}
+
+/* 2. CREATE MOBILE NAVIGATION */
+.mobile-nav {
+    display: none;
+    flex-direction: column;
+    background: var(--study-card);
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    padding: 20px;
+    border-top: 1px solid var(--study-border);
+}
+
+.mobile-nav.active {
+    display: flex;
+}
+
+.mobile-nav a {
+    padding: 12px 0;
+    border-bottom: 1px solid var(--study-border);
+    color: var(--study-text);
+}
+
+.mobile-nav a:last-child {
+    border-bottom: none;
+}
+
+/* 3. FIX HORIZONTAL SCROLLING */
+html, body {
+    overflow-x: hidden;
+    width: 100%;
+}
+
+* {
+    max-width: 100%;
+}
+
+/* Ensure mobile nav works properly */
+#mobileNav {
+    transition: all 0.3s ease;
+}
+

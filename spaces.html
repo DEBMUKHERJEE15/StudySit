@@ -208,3 +208,294 @@
 
 </body>
 </html>
+
+<!DOCTYPE html>
+<html lang="en" class="">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Our Spaces - CoWorkHub</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            "study-bg": "var(--color-background-primary)",
+            "study-card": "var(--color-background-secondary)",
+            "study-text": "var(--color-text-primary)",
+            "study-accent-cta": "var(--color-accent-cta)",
+            "study-accent-secondary": "var(--color-accent-secondary)",
+            "study-border": "var(--color-border)",
+          },
+          keyframes: {
+            "fade-slide-up": {
+              "0%": { opacity: "0", transform: "translateY(1rem)" },
+              "100%": { opacity: "1", transform: "translateY(0)" },
+            },
+          },
+          animation: {
+            "fade-slide-up": "fade-slide-up 0.8s ease-out forwards",
+          }
+        },
+      },
+      darkMode: "class",
+      plugins: [],
+    }
+  </script>
+  <style>
+    :root {
+      --color-background-primary: #FFFFFF;
+      --color-background-secondary: #F8F8F8;
+      --color-text-primary: #333333;
+      --color-accent-cta: #FFC72C;
+      --color-accent-secondary: #A9B497;
+      --color-border: #E0E0E0;
+    }
+    .dark {
+      --color-background-primary: #121212;
+      --color-background-secondary: #1E1E1E;
+      --color-text-primary: #F5F5F5;
+      --color-border: #3A3A3A;
+    }
+    body {
+        background-color: var(--color-background-primary);
+        color: var(--color-text-primary);
+    }
+
+    @media (max-width: 768px) {
+    #mobileNav {
+        width: 50% !important;
+        max-width: 200px;
+        position: absolute;
+        right: 0;
+        top: 100%;
+        transform: translateY(-20px);
+        opacity: 0;
+        transition: all 0.3s ease-in-out;
+        pointer-events: none;
+    }
+    
+    #mobileNav.show {
+        transform: translateY(0);
+        opacity: 1;
+        pointer-events: all;
+    }
+}
+
+/* Desktop Navbar Hover Animations - Enhanced */
+@media (min-width: 768px) {
+    .nav-link-item {
+        position: relative;
+        overflow: hidden;
+        padding: 10px 20px; /* Increased padding for bigger oval */
+        border-radius: 25px; /* More rounded for bigger oval */
+        transition: all 0.3s ease-in-out;
+        z-index: 1;
+    }
+    
+    .nav-link-item::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: var(--color-accent-cta); /* Your yellow color */
+        border-radius: 25px; /* Match the increased border radius */
+        transition: left 0.3s ease-in-out;
+        z-index: -1;
+    }
+    
+    .nav-link-item:hover::before {
+        left: 0;
+    }
+    
+    .nav-link-item:hover {
+        color: var(--color-text-primary);
+        transform: translateY(-2px);
+        font-weight: 700 !important; /* Make text bold on hover */
+    }
+    
+    /* Ensure text stays on top of the oval */
+    .nav-link-item span {
+        position: relative;
+        z-index: 2;
+    }
+}
+  </style>
+</head>
+<body class="bg-study-bg text-study-text">
+
+ <!-- HEADER & NAVIGATION -->
+<header class="fixed top-0 w-full bg-study-bg/95 backdrop-blur-sm shadow-sm transition-all duration-300 z-50">
+    <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+        <a href="index.html" class="text-2xl font-bold text-study-text">StudySit</a>
+        
+        <!-- Desktop Navigation (hidden on mobile) -->
+<div class="hidden md:flex items-center space-x-2">
+    <a href="index.html" class="nav-link-item text-study-text hover:text-study-text transition-colors duration-200">
+        <span>Home</span>
+    </a>
+    <a href="about.html" class="nav-link-item text-study-text hover:text-study-text transition-colors duration-200">
+        <span>About</span>
+    </a>
+    <a href="spaces.html" class="nav-link-item text-study-text hover:text-study-text transition-colors duration-200">
+        <span>Spaces</span>
+    </a>
+    <a href="pricing.html" class="nav-link-item text-study-text hover:text-study-text transition-colors duration-200">
+        <span>Pricing</span>
+    </a>
+    <a href="contact.html" class="nav-link-item text-study-text hover:text-study-text transition-colors duration-200">
+        <span>Contact</span>
+    </a>
+    <a href="faq.html" class="nav-link-item text-study-text hover:text-study-text transition-colors duration-200">
+        <span>FAQ</span>
+    </a>
+</div>
+
+        <!-- Right side buttons -->
+        <div class="flex items-center space-x-4">
+            <!-- Book Now button -->
+            <a href="pricing.html#plans" class="bg-study-accent-cta text-study-text px-4 py-2 rounded-lg font-semibold hover:bg-opacity-90 transition-all duration-200 active:scale-95">Book Now</a>
+            
+            <!-- Mobile menu button - Changed to yellow -->
+            <button class="md:hidden bg-study-accent-cta text-study-text p-2 rounded-lg" id="mobileMenuBtn">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+            
+            <!-- Theme toggle -->
+            <button id="theme-toggle" class="p-2 rounded-full transition-colors duration-200 hover:bg-study-accent-secondary/20">
+                <svg id="theme-toggle-dark-icon" class="h-6 w-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9.003 9.003 0 0015 3a9 9 0 00-9 9c0 4.223 2.91 7.82 6.873 8.783.5.093.5-.213.5-.474V19.5a.5.5 0 00-.5-.5 8.5 8.5 0 01-8.5-8.5 8.5 8.5 0 0110.158-8.135 1 1 0 001.079.136A8.5 8.5 0 0122 10.5c0 1.252-.267 2.44-.736 3.522a.5.5 0 00.182.635l2.518 1.708a.5.5 0 00.69-.635z"/>
+                </svg>
+                <svg id="theme-toggle-light-icon" class="h-6 w-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M12 5a7 7 0 100 14 7 7 0 000-14z"/>
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+
+<!-- Mobile Navigation Menu - Fixed to show properly -->
+<div class="md:hidden hidden bg-study-accent-cta shadow-lg" id="mobileNav" style="width: 50%; max-width: 200px; position: absolute; right: 0; top: 100%;">
+    <div class="container mx-auto px-6 py-6 flex flex-col space-y-4">
+        <a href="index.html" class="text-study-text font-semibold hover:bg-study-bg/20 py-3 px-4 rounded-lg transition-all duration-200">Home</a>
+        <a href="about.html" class="text-study-text font-semibold hover:bg-study-bg/20 py-3 px-4 rounded-lg transition-all duration-200">About</a>
+        <a href="spaces.html" class="text-study-text font-semibold hover:bg-study-bg/20 py-3 px-4 rounded-lg transition-all duration-200">Spaces</a>
+        <a href="pricing.html" class="text-study-text font-semibold hover:bg-study-bg/20 py-3 px-4 rounded-lg transition-all duration-200">Pricing</a>
+        <a href="contact.html" class="text-study-text font-semibold hover:bg-study-bg/20 py-3 px-4 rounded-lg transition-all duration-200">Contact</a>
+        <a href="faq.html" class="text-study-text font-semibold hover:bg-study-bg/20 py-3 px-4 rounded-lg transition-all duration-200">FAQ</a>
+        <!-- Book Now in mobile menu -->
+        <a href="pricing.html#plans" class="bg-study-bg text-study-text font-semibold py-3 px-4 rounded-lg text-center hover:bg-opacity-90 transition-all duration-200 active:scale-95 mt-4">Book Now</a>
+    </div>
+</div>
+</header>
+
+  <!-- MAIN CONTENT -->
+  <main class="pt-24">
+    <div class="container mx-auto px-6 py-12">
+      <header class="text-center mb-16">
+        <h1 class="text-5xl md:text-6xl font-bold text-study-text animate-fade-slide-up opacity-0">Our Spaces</h1>
+        <p class="mt-4 text-lg text-study-text/80 animate-fade-slide-up opacity-0" style="animation-delay: 200ms;">Designed for productivity, comfort, and collaboration.</p>
+      </header>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+        <!-- Hot Desk -->
+        <div class="bg-study-card border border-study-border rounded-xl p-6 transition-all duration-300 hover:shadow-2xl hover:border-study-accent-cta hover:-translate-y-1 animate-fade-slide-up opacity-0" style="animation-delay: 400ms;">
+          <img src="https://smartway2.com/wp-content/uploads/2020/11/hot-desking-for-the-open-plan-office-1080x675.jpg" alt="Hot Desk" class="w-full h-48 object-cover rounded-lg mb-4">
+          <h3 class="text-2xl font-bold text-study-text mb-2">Hot Desk</h3>
+          <p class="text-study-text/80">Flexible seating in a shared environment. Perfect for freelancers and digital nomads who love variety.</p>
+        </div>
+
+        <!-- Dedicated Desk -->
+        <div class="bg-study-card border border-study-border rounded-xl p-6 transition-all duration-300 hover:shadow-2xl hover:border-study-accent-cta hover:-translate-y-1 animate-fade-slide-up opacity-0" style="animation-delay: 600ms;">
+          <img src="https://images.squarespace-cdn.com/content/v1/54f54ee5e4b08c831d40bb34/1589058802124-1OQVOP2BP6BE6XAMO7UL/RollerDesk-018a.jpg" alt="Dedicated Desk" class="w-full h-48 object-cover rounded-lg mb-4">
+          <h3 class="text-2xl font-bold text-study-text mb-2">Dedicated Desk</h3>
+          <p class="text-study-text/80">Your own desk reserved daily. Includes storage and 24/7 access for consistent productivity.</p>
+        </div>
+
+        <!-- Private Office -->
+        <div class="bg-study-card border border-study-border rounded-xl p-6 transition-all duration-300 hover:shadow-2xl hover:border-study-accent-cta hover:-translate-y-1 animate-fade-slide-up opacity-0" style="animation-delay: 800ms;">
+          <img src="https://images.unsplash.com/photo-1593642634367-d91a135587b5?fit=crop&w=1000&q=80" alt="Private Office" class="w-full h-48 object-cover rounded-lg mb-4">
+          <h3 class="text-2xl font-bold text-study-text mb-2">Private Office</h3>
+          <p class="text-study-text/80">Fully furnished private offices for teams of 1-10. Quiet, secure, and fully serviced.</p>
+        </div>
+
+        <!-- Additional cards can be added here -->
+
+      </div>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-study-card mt-20">
+    <div class="container mx-auto px-6 py-8 text-center text-study-text/60">
+      <p>&copy; 2025 StudySit. All rights reserved.</p>
+    </div>
+  </footer>
+
+<script>
+    // Dark Mode Toggle
+    const themeToggle = document.getElementById("theme-toggle");
+    const darkIcon = document.getElementById("theme-toggle-dark-icon");
+    const lightIcon = document.getElementById("theme-toggle-light-icon");
+
+    // Function to set the theme
+    function setTheme(isDark) {
+        document.documentElement.classList.toggle("dark", isDark);
+        lightIcon.classList.toggle("hidden", !isDark);
+        darkIcon.classList.toggle("hidden", isDark);
+        localStorage.setItem("color-theme", isDark ? "dark" : "light");
+    }
+
+    // Initial theme check
+    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    const savedTheme = localStorage.getItem("color-theme");
+
+    setTheme(savedTheme === "dark" || (!savedTheme && prefersDark));
+
+    // Theme toggle button listener
+    themeToggle.addEventListener("click", () => {
+        setTheme(!document.documentElement.classList.contains("dark"));
+    });
+
+    // Mobile menu toggle - WITH SMOOTH ANIMATION
+    document.getElementById('mobileMenuBtn').addEventListener('click', function() {
+        const mobileNav = document.getElementById('mobileNav');
+        
+        if (mobileNav.classList.contains('show')) {
+            // Close menu
+            mobileNav.classList.remove('show');
+            setTimeout(() => {
+                mobileNav.classList.add('hidden');
+            }, 300); // Match the transition duration
+        } else {
+            // Open menu
+            mobileNav.classList.remove('hidden');
+            // Small delay to allow display change before animation
+            setTimeout(() => {
+                mobileNav.classList.add('show');
+            }, 10);
+        }
+    });
+
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', function(event) {
+        const mobileNav = document.getElementById('mobileNav');
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        
+        if (!mobileNav.contains(event.target) && !mobileMenuBtn.contains(event.target) && mobileNav.classList.contains('show')) {
+            mobileNav.classList.remove('show');
+            setTimeout(() => {
+                mobileNav.classList.add('hidden');
+            }, 300);
+        }
+    });
+</script>
+
+</body>
+</html>
