@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en" class="">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sign Up - StudySit</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            "study-bg": "var(--color-background-primary)",
+            "study-card": "var(--color-background-secondary)",
+            "study-text": "var(--color-text-primary)",
+            "study-accent-cta": "var(--color-accent-cta)",
+            "study-accent-secondary": "var(--color-accent-secondary)",
+            "study-border": "var(--color-border)",
+          },
+          keyframes: {
+            "fade-slide-up": {
+              "0%": { opacity: "0", transform: "translateY(1rem)" },
+              "100%": { opacity: "1", transform: "translateY(0)" },
+            },
+          },
+          animation: {
+            "fade-slide-up": "fade-slide-up 0.8s ease-out forwards",
+          }
+        },
+      },
+      darkMode: "class",
+      plugins: [],
+    }
+  </script>
+  <style>
+    :root {
+      --color-background-primary: #FFFFFF;
+      --color-background-secondary: #F8F8F8;
+      --color-text-primary: #333333;
+      --color-accent-cta: #FFC72C;
+      --color-accent-secondary: #A9B497;
+      --color-border: #E0E0E0;
+    }
+    .dark {
+      --color-background-primary: #121212;
+      --color-background-secondary: #1E1E1E;
+      --color-text-primary: #F5F5F5;
+      --color-border: #3A3A3A;
+    }
+    body {
+        background-color: var(--color-background-primary);
+        color: var(--color-text-primary);
+    }
+
+    /* Desktop Navbar Hover Animations */
+    @media (min-width: 768px) {
+        .nav-link-item {
+            position: relative;
+            overflow: hidden;
+            padding: 10px 20px;
+            border-radius: 25px;
+            transition: all 0.3s ease-in-out;
+        }
+        
+        .nav-link-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--color-accent-cta);
+            border-radius: 25px;
+            transition: left 0.3s ease-in-out;
+            z-index: -1;
+        }
+        
+        .nav-link-item:hover::before {
+            left: 0;
+        }
+        
+        .nav-link-item:hover {
+            color: var(--color-text-primary);
+            transform: translateY(-2px);
+            font-weight: 700;
+        }
+    }
+
+    /* Mobile Navbar */
+    @media (max-width: 768px) {
+        #mobileNav {
+            width: 50% !important;
+            max-width: 200px;
+            position: absolute;
+            right: 0;
+            top: 100%;
+            transform: translateY(-20px);
+            opacity: 0;
+            transition: all 0.3s ease-in-out;
+            pointer-events: none;
+        }
+        
+        #mobileNav.show {
+            transform: translateY(0);
+            opacity: 1;
+            pointer-events: all;
+        }
+    }
+
+    /* Auth Page Styles */
+    .auth-container {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 100px 20px 50px;
+    }
+    .auth-card {
+        background: var(--color-background-secondary);
+        padding: 40px;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        width: 100%;
+        max-width: 400px;
+    }
+    .auth-title {
+        text-align: center;
+        margin-bottom: 30px;
+        color: var(--color-text-primary);
+    }
+    .auth-input {
+        width: 100%;
+        padding: 12px 16px;
+        border: 1px solid var(--color-border);
+        border-radius: 10px;
+        margin-bottom: 20px;
+        background: var(--color-background-primary);
+        color: var(--color-text-primary);
+        font-size: 16px; /* Prevent zoom on iOS */
+    }
+    .auth-btn {
+        width: 100%;
+        padding: 12px;
+        background: var(--color-accent-cta);
+        color: var(--color-text-primary);
+        border: none;
+        border-radius: 10px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-size: 16px;
+    }
+    .auth-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(255, 199, 44, 0.3);
+    }
+    .auth-link {
+        text-align: center;
+        margin-top: 20px;
+        color: var(--color-text-primary);
+    }
+    .demo-note {
+        text-align: center;
+        margin-top: 24px;
+        font-size: 0.875rem;
+        color: var(--color-text-primary);
+        opacity: 0.6;
+    }
+  </style>
+</head>
+<body class="bg-study-bg text-study-text">
+
+<!-- HEADER & NAVIGATION -->
+<header class="fixed top-0 w-full bg-study-bg/95 backdrop-blur-sm shadow-sm transition-all duration-300 z-50">
+  <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+    <!-- Logo -->
+    <a href="index.html" class="text-2xl font-bold text-study-text">StudySit</a>
+
+    <!-- Centered Navigation Links -->
+    <div class="hidden md:flex items-center space-x-2 absolute left-1/2 transform -translate-x-1/2">
+      <a href="index.html" class="nav-link-item text-study-text">Home</a>
+      <a href="about.html" class="nav-link-item text-study-text">About</a>
+      <a href="spaces.html" class="nav-link-item text-study-text">Spaces</a>
+      <a href="pricing.html" class="nav-link-item text-study-text">Pricing</a>
+      <a href="contact.html" class="nav-link-item text-study-text">Contact</a>
+      <a href="faq.html" class="nav-link-item text-study-text">FAQ</a>
+    </div>
+
+    <!-- Right side buttons -->
+    <div class="flex items-center space-x-4 ml-auto">
+      <!-- Account Dropdown -->
+      <div class="relative">
+        <button id="authDropdownBtn" 
+          class="flex items-center space-x-1 text-study-text hover:text-study-accent-secondary transition-colors duration-200 p-2 rounded-lg hover:bg-study-bg/20">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+              d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+          </svg>
+          <span>Account</span>
+        </button>
+
+        <!-- Dropdown Menu -->
+        <div id="authDropdown" 
+          class="hidden absolute right-0 mt-2 w-48 bg-study-bg border border-study-border rounded-lg shadow-lg z-50 py-2">
+
+          <!-- When not logged in -->
+          <a href="login.html" 
+             class="block px-4 py-2 text-study-text hover:bg-study-accent-cta hover:text-study-text transition-colors duration-200">Login</a>
+          <a href="signup.html" 
+             class="block px-4 py-2 text-study-text hover:bg-study-accent-cta hover:text-study-text transition-colors duration-200">Sign Up</a>
+
+          <!-- When logged in -->
+          <a href="#" onclick="logout()" 
+             class="hidden block px-4 py-2 text-study-text hover:bg-study-accent-cta hover:text-study-text transition-colors duration-200" 
+             id="logoutLink">Logout</a>
+        </div>
+      </div>
+
+      <!-- Book Now button -->
+      <a href="pricing.html#plans" 
+         class="bg-study-accent-cta text-study-text px-4 py-2 rounded-lg font-semibold hover:bg-opacity-90 transition-all duration-200 active:scale-95">Book Now</a>
+
+      <!-- Mobile menu button -->
+      <button class="md:hidden bg-study-accent-cta text-study-text p-2 rounded-lg" id="mobileMenuBtn">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
+
+      <!-- Theme toggle -->
+      <button id="theme-toggle" 
+        class="p-2 rounded-full transition-colors duration-200 hover:bg-study-accent-secondary/20">
+        <svg id="theme-toggle-dark-icon" class="h-6 w-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                d="M20.354 15.354A9.003 9.003 0 0015 3a9 9 0 00-9 9c0 4.223 2.91 7.82 6.873 8.783"/>
+        </svg>
+        <svg id="theme-toggle-light-icon" class="h-6 w-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                d="M12 3v1m0 16v1m9-9h-1M4 12H3"/>
+        </svg>
+      </button>
+    </div>
+  </nav>
+</header>
+
+  <!-- SIGNUP SECTION -->
+  <main class="pt-24">
+    <div class="auth-container">
+        <div class="auth-card animate-fade-slide-up opacity-0" style="animation-delay: 200ms;">
+            <h2 class="auth-title text-3xl font-bold">Join StudySit</h2>
+            <form id="signupForm">
+                <input type="text" class="auth-input" placeholder="Full Name" required>
+                <input type="email" class="auth-input" placeholder="Email" required>
+                <input type="password" class="auth-input" placeholder="Password" required>
+                <input type="password" class="auth-input" placeholder="Confirm Password" required>
+                <button type="submit" class="auth-btn">Create Account</button>
+            </form>
+            <div class="auth-link">
+                <p>Already have an account? <a href="login.html" class="text-study-accent-cta font-semibold">Login</a></p>
+            </div>
+            <div class="demo-note">
+                <p>🔒 Demo: No real data stored</p>
+            </div>
+        </div>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-study-card mt-20">
+    <div class="container mx-auto px-6 py-8 text-center text-study-text/60">
+      <p>&copy; 2025 StudySit. All rights reserved.</p>
+    </div>
+  </footer>
+
+<script>
+// ===== DARK MODE TOGGLE =====
+const themeToggle = document.getElementById("theme-toggle");
+const darkIcon = document.getElementById("theme-toggle-dark-icon");
+const lightIcon = document.getElementById("theme-toggle-light-icon");
+
+function setTheme(isDark) {
+    document.documentElement.classList.toggle("dark", isDark);
+    lightIcon.classList.toggle("hidden", !isDark);
+    darkIcon.classList.toggle("hidden", isDark);
+    localStorage.setItem("color-theme", isDark ? "dark" : "light");
+}
+
+const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+const savedTheme = localStorage.getItem("color-theme");
+setTheme(savedTheme === "dark" || (!savedTheme && prefersDark));
+
+themeToggle.addEventListener("click", () => {
+    setTheme(!document.documentElement.classList.contains("dark"));
+});
+
+
+// ===== MOBILE MENU =====
+document.getElementById('mobileMenuBtn').addEventListener('click', function() {
+    const mobileNav = document.getElementById('mobileNav');
+    
+    if (mobileNav.classList.contains('show')) {
+        mobileNav.classList.remove('show');
+        setTimeout(() => {
+            mobileNav.classList.add('hidden');
+        }, 300);
+    } else {
+        mobileNav.classList.remove('hidden');
+        setTimeout(() => {
+            mobileNav.classList.add('show');
+        }, 10);
+    }
+});
+
+document.addEventListener('click', function(event) {
+    const mobileNav = document.getElementById('mobileNav');
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    
+    if (!mobileNav.contains(event.target) && !mobileMenuBtn.contains(event.target) && mobileNav.classList.contains('show')) {
+        mobileNav.classList.remove('show');
+        setTimeout(() => {
+            mobileNav.classList.add('hidden');
+        }, 300);
+    }
+});
+
+
+// ===== AUTH DROPDOWN & LOGIN STATE =====
+const authButtons = document.getElementById('authButtons');
+const userProfile = document.getElementById('userProfile');
+const userName = document.getElementById('userName');
+const authDropdownBtn = document.getElementById('authDropdownBtn');
+const authDropdown = document.getElementById('authDropdown');
+const logoutLink = document.getElementById('logoutLink');
+
+function checkAuthState() {
+    // Get user from localStorage (simulate login)
+    const user = JSON.parse(localStorage.getItem('studysit_user'));
+
+    if (user) {
+        authButtons?.classList.add('hidden');
+        userProfile?.classList.remove('hidden');
+        if (userName) userName.textContent = user.name || user.email.split('@')[0];
+    } else {
+        authButtons?.classList.remove('hidden');
+        userProfile?.classList.add('hidden');
+    }
+}
+
+// Logout function
+function logout() {
+    localStorage.removeItem('studysit_user');
+    checkAuthState();
+    alert('Logged out!');
+}
+
+// Toggle dropdown on button click
+authDropdownBtn?.addEventListener('click', function(e) {
+    e.stopPropagation();
+    authDropdown?.classList.toggle('hidden');
+});
+
+// Close dropdown when clicking outside
+document.addEventListener('click', function() {
+    authDropdown?.classList.add('hidden');
+});
+
+// Initial check on page load
+document.addEventListener('DOMContentLoaded', checkAuthState);
+</script>
+
+</body>
+</html>
