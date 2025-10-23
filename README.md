@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/GirlScriptSummerOfCode/GSSoC-2025/main/assets/banner.png" alt="GSSoC 2025" width="90%">
+  <img src="https://raw.githubusercontent.com/girlscript/gssoc-assets/main/Logos/GS_logo_White.png#gh-dark-mode-only" alt="GSSoC 2025" width="90%">
 </p>
 
 Quick overview
