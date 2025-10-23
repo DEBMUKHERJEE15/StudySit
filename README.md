@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="https://raw.githubusercontent.com/GirlScriptSummerOfCode/GSSoC-2025/main/assets/banner.png" alt="GSSoC 2025" width="90%">
+</p>
+
 Quick overview
 StudySit is a modern, static website for a community-focused coworking space aims to provide a warm, productive environment for students, creators, and freelancers, featuring a clean front‑end and clear navigation across About, Spaces, Pricing, and Contact pages.
 
