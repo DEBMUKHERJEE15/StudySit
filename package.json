@@ -1,0 +1,46 @@
+{
+  "name": "studysit",
+  "version": "1.0.0",
+  "description": "StudySit - India's premier coworking space platform for students and professionals",
+  "main": "index.html",
+  "scripts": {
+    "start": "http-server -p 8000 -o",
+    "dev": "http-server -p 8000 -o -c-1",
+    "build": "echo 'No build process required for static site'",
+    "test": "echo 'Tests will be added in future versions'",
+    "lint": "echo 'Linting will be added in future versions'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DEBMUKHERJEE15/StudySit.git"
+  },
+  "keywords": [
+    "coworking",
+    "workspace",
+    "students",
+    "professionals",
+    "booking",
+    "india",
+    "hyperlocal",
+    "study-space",
+    "office-rental",
+    "shared-workspace"
+  ],
+  "author": "DEBMUKHERJEE15",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/DEBMUKHERJEE15/StudySit/issues"
+  },
+  "homepage": "https://github.com/DEBMUKHERJEE15/StudySit#readme",
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ],
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}
