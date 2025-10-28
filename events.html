@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en" class="">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>StudySit - Events</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            "study-bg": "var(--color-background-primary)",
+            "study-card": "var(--color-background-secondary)",
+            "study-text": "var(--color-text-primary)",
+            "study-accent-cta": "var(--color-accent-cta)",
+            "study-accent-secondary": "var(--color-accent-secondary)",
+            "study-border": "var(--color-border)",
+          },
+          keyframes: {
+            "fade-slide-up": {
+              "0%": { opacity: "0", transform: "translateY(1rem)" },
+              "100%": { opacity: "1", transform: "translateY(0)" },
+            },
+          },
+          animation: {
+            "fade-slide-up": "fade-slide-up 0.8s ease-out forwards",
+          }
+        },
+      },
+      darkMode: "class",
+      plugins: [],
+    }
+  </script>
+  <style>
+    :root {
+      --color-background-primary: #FFFFFF;
+      --color-background-secondary: #F8F8F8;
+      --color-text-primary: #333333;
+      --color-accent-cta: #FFC72C;
+      --color-accent-secondary: #A9B497;
+      --color-border: #E0E0E0;
+    }
+    .dark {
+      --color-background-primary: #121212;
+      --color-background-secondary: #1E1E1E;
+      --color-text-primary: #F5F5F5;
+      --color-border: #3A3A3A;
+    }
+    body {
+        background-color: var(--color-background-primary);
+        color: var(--color-text-primary);
+    }
+
+    @media (min-width: 768px) {
+        .nav-link-item {
+            position: relative;
+            overflow: hidden;
+            padding: 10px 20px;
+            border-radius: 25px;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .nav-link-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--color-accent-cta);
+            border-radius: 25px;
+            transition: left 0.3s ease-in-out;
+            z-index: -1;
+        }
+
+        .nav-link-item:hover::before {
+            left: 0;
+        }
+
+        .nav-link-item:hover {
+            color: var(--color-text-primary);
+            transform: translateY(-2px);
+            font-weight: 700;
+        }
+
+        #authDropdownBtn {
+            transition: all 0.3s ease-in-out;
+            border-radius: 10px;
+        }
+
+        #authDropdownBtn:hover {
+            background: var(--color-accent-cta);
+            color: var(--color-text-primary);
+            transform: translateY(-1px);
+        }
+    }
+
+    @media (max-width: 768px) {
+        #mobileNav {
+            width: 50% !important;
+            max-width: 200px;
+            position: absolute;
+            right: 0;
+            top: 100%;
+            transform: translateY(-20px);
+            opacity: 0;
+            transition: all 0.3s ease-in-out;
+            pointer-events: none;
+        }
+
+        #mobileNav.show {
+            transform: translateY(0);
+            opacity: 1;
+            pointer-events: all;
+        }
+    }
+
+    header nav a.logo-container {
+        display: flex !important;
+        align-items: center !important;
+        gap: 6px;
+        text-decoration: none;
+        transform-origin: center;
+        transition: transform 0.3s ease-in-out;
+    }
+
+    header nav a.logo-container:hover {
+        transform: scale(1.05);
+    }
+
+    .navbar-logo {
+        height: clamp(30px, 5vw, 45px);
+        filter: brightness(0);
+    }
+
+    .dark .navbar-logo {
+        filter: brightness(0) invert(1);
+    }
+
+    header nav a.logo-container span {
+        font-size: clamp(14px, 2vw, 20px);
+    }
+
+    .event-card {
+        transition: all 0.3s ease-in-out;
+    }
+
+    .event-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    }
+
+    .event-badge {
+        display: inline-block;
+        padding: 4px 12px;
+        border-radius: 12px;
+        font-size: 0.75rem;
+        font-weight: 600;
+        text-transform: uppercase;
+    }
+
+    .badge-workshop {
+        background-color: #E3F2FD;
+        color: #1565C0;
+    }
+
+    .dark .badge-workshop {
+        background-color: #1565C0;
+        color: #E3F2FD;
+    }
+
+    .badge-meetup {
+        background-color: #F3E5F5;
+        color: #6A1B9A;
+    }
+
+    .dark .badge-meetup {
+        background-color: #6A1B9A;
+        color: #F3E5F5;
+    }
+
+    .badge-hackathon {
+        background-color: #FFF3E0;
+        color: #E65100;
+    }
+
+    .dark .badge-hackathon {
+        background-color: #E65100;
+        color: #FFF3E0;
+    }
+
+    .badge-networking {
+        background-color: #E8F5E9;
+        color: #2E7D32;
+    }
+
+    .dark .badge-networking {
+        background-color: #2E7D32;
+        color: #E8F5E9;
+    }
+  </style>
+</head>
+<body class="bg-study-bg text-study-text">
+
+<!-- HEADER & NAVIGATION -->
+<header class="fixed top-0 w-full bg-study-bg/95 backdrop-blur-sm shadow-sm transition-all duration-300 z-50">
+    <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+        <a href="index.html" class="flex items-center space-x-2 logo-container">
+            <img src="StudySit_logo.svg" class="navbar-logo h-12 w-auto" alt="StudySit">
+            <span class="text-2xl font-bold text-study-text">StudySit</span>
+        </a>
+
+        <div class="hidden md:flex items-center space-x-2 flex-1 justify-center">
+            <a href="index.html" class="nav-link-item text-study-text hover:text-study-text transition-colors duration-200">Home</a>
+            <a href="about.html" class="nav-link-item text-study-text hover:text-study-text transition-colors duration-200">About</a>
+            <a href="spaces.html" class="nav-link-item text-study-text hover:text-study-text transition-colors duration-200">Spaces</a>
+            <a href="pricing.html" class="nav-link-item text-study-text hover:text-study-text transition-colors duration-200">Pricing</a>
+            <a href="contact.html" class="nav-link-item text-study-text hover:text-study-text transition-colors duration-200">Contact</a>
+            <a href="events.html" class="nav-link-item text-study-text hover:text-study-text transition-colors duration-200">Events</a>
+            <a href="faq.html" class="nav-link-item text-study-text hover:text-study-text transition-colors duration-200">FAQ</a>
+        </div>
+
+        <div class="flex items-center space-x-4 ml-auto">
+            <div class="relative">
+                <button id="authDropdownBtn" class="flex items-center space-x-1 text-study-text hover:text-study-accent-secondary transition-colors duration-200 p-2 rounded-lg hover:bg-study-bg/20">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                    </svg>
+                    <span>Account</span>
+                </button>
+
+                <div id="authDropdown" class="hidden absolute right-0 mt-2 w-48 bg-study-bg border border-study-border rounded-lg shadow-lg z-50 py-2">
+                    <a href="login.html" id="loginLink" class="block px-4 py-2 text-study-text hover:bg-study-accent-cta hover:text-study-text transition-colors duration-200">Login</a>
+                    <a href="signup.html" id="signupLink" class="block px-4 py-2 text-study-text hover:bg-study-accent-cta hover:text-study-text transition-colors duration-200">Sign Up</a>
+                    <a href="#" onclick="logout()" id="logoutLink" class="hidden block px-4 py-2 text-study-text hover:bg-study-accent-cta hover:text-study-text transition-colors duration-200">Logout</a>
+                </div>
+            </div>
+
+            <a href="pricing.html#plans" class="bg-study-accent-cta text-study-text px-4 py-2 rounded-lg font-semibold hover:bg-opacity-90 transition-all duration-200 active:scale-95">Book Now</a>
+
+            <button class="md:hidden bg-study-accent-cta text-study-text p-2 rounded-lg" id="mobileMenuBtn">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+
+            <button id="theme-toggle" class="p-2 rounded-full transition-colors duration-200 hover:bg-study-accent-secondary/20">
+                <svg id="theme-toggle-dark-icon" class="h-6 w-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9.003 9.003 0 0015 3a9 9 0 00-9 9c0 4.223 2.91 7.82 6.873 8.783.5.093.5-.213.5-.474V19.5a.5.5 0 00-.5-.5 8.5 8.5 0 01-8.5-8.5 8.5 8.5 0 0110.158-8.135 1 1 0 001.079.136A8.5 8.5 0 0122 10.5c0 1.252-.267 2.44-.736 3.522a.5.5 0 00.182.635l2.518 1.708a.5.5 0 00.69-.635z"/>
+                </svg>
+                <svg id="theme-toggle-light-icon" class="h-6 w-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M12 5a7 7 0 100 14 7 7 0 000-14z"/>
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    <div class="md:hidden hidden bg-study-accent-cta shadow-lg" id="mobileNav" style="width: 50%; max-width: 200px; position: absolute; right: 0; top: 100%;">
+        <div class="container mx-auto px-6 py-6 flex flex-col space-y-4">
+            <a href="index.html" class="text-study-text font-semibold hover:bg-study-bg/20 py-3 px-4 rounded-lg transition-all duration-200">Home</a>
+            <a href="about.html" class="text-study-text font-semibold hover:bg-study-bg/20 py-3 px-4 rounded-lg transition-all duration-200">About</a>
+            <a href="spaces.html" class="text-study-text font-semibold hover:bg-study-bg/20 py-3 px-4 rounded-lg transition-all duration-200">Spaces</a>
+            <a href="events.html" class="text-study-text font-semibold hover:bg-study-bg/20 py-3 px-4 rounded-lg transition-all duration-200">Events</a>
+            <a href="pricing.html" class="text-study-text font-semibold hover:bg-study-bg/20 py-3 px-4 rounded-lg transition-all duration-200">Pricing</a>
+            <a href="contact.html" class="text-study-text font-semibold hover:bg-study-bg/20 py-3 px-4 rounded-lg transition-all duration-200">Contact</a>
+            <a href="faq.html" class="text-study-text font-semibold hover:bg-study-bg/20 py-3 px-4 rounded-lg transition-all duration-200">FAQ</a>
+            <a href="login.html" class="text-study-text font-semibold hover:bg-study-bg/20 py-3 px-4 rounded-lg transition-all duration-200">Login</a>
+            <a href="signup.html" class="text-study-text font-semibold hover:bg-study-bg/20 py-3 px-4 rounded-lg transition-all duration-200">Sign Up</a>
+            <a href="pricing.html#plans" class="bg-study-bg text-study-text font-semibold py-3 px-4 rounded-lg text-center hover:bg-opacity-90 transition-all duration-200 active:scale-95 mt-2">Book Now</a>
+        </div>
+    </div>
+</header>
+
+<!-- HERO SECTION -->
+<main class="pt-24">
+    <section class="container mx-auto px-6 py-16 text-center">
+        <h1 class="text-5xl md:text-7xl font-bold text-study-text animate-fade-slide-up opacity-0" style="animation-delay: 100ms;">Community Events</h1>
+        <p class="mt-4 text-lg md:text-xl text-study-text/80 animate-fade-slide-up opacity-0 max-w-3xl mx-auto" style="animation-delay: 300ms;">Connect, learn, and grow with fellow students and professionals through our workshops, meetups, and hackathons.</p>
+    </section>
+
+    <!-- UPCOMING EVENTS -->
+    <section class="container mx-auto px-6 py-12">
+        <h2 class="text-3xl md:text-4xl font-bold text-study-text mb-8">Upcoming Events</h2>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Event Card 1 -->
+            <div class="event-card bg-study-card rounded-xl shadow-md p-6 animate-fade-slide-up opacity-0" style="animation-delay: 100ms;">
+                <span class="event-badge badge-workshop">Workshop</span>
+                <h3 class="text-2xl font-bold text-study-text mt-4 mb-2">Web Development Bootcamp</h3>
+                <div class="flex items-center text-study-text/70 text-sm mb-2">
+                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                    </svg>
+                    <span>November 5, 2025 | 10:00 AM - 4:00 PM</span>
+                </div>
+                <div class="flex items-center text-study-text/70 text-sm mb-4">
+                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                    </svg>
+                    <span>StudySit Main Space</span>
+                </div>
+                <p class="text-study-text/80 mb-4">Learn modern web development from scratch with hands-on projects. Perfect for beginners looking to start their coding journey.</p>
+                <button class="w-full bg-study-accent-cta text-study-text py-2 rounded-lg font-semibold hover:bg-opacity-90 transition-all duration-200">Register Now</button>
+            </div>
+
+            <!-- Event Card 2 -->
+            <div class="event-card bg-study-card rounded-xl shadow-md p-6 animate-fade-slide-up opacity-0" style="animation-delay: 200ms;">
+                <span class="event-badge badge-hackathon">Hackathon</span>
+                <h3 class="text-2xl font-bold text-study-text mt-4 mb-2">StudySit Hack 2025</h3>
+                <div class="flex items-center text-study-text/70 text-sm mb-2">
+                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                    </svg>
+                    <span>November 15-17, 2025 | 48 Hours</span>
+                </div>
+                <div class="flex items-center text-study-text/70 text-sm mb-4">
+                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                    </svg>
+                    <span>StudySit All Spaces</span>
+                </div>
+                <p class="text-study-text/80 mb-4">48-hour innovation challenge with prizes worth 50,000. Build solutions for real-world problems with your team.</p>
+                <button class="w-full bg-study-accent-cta text-study-text py-2 rounded-lg font-semibold hover:bg-opacity-90 transition-all duration-200">Register Team</button>
+            </div>
+
+            <!-- Event Card 3 -->
+            <div class="event-card bg-study-card rounded-xl shadow-md p-6 animate-fade-slide-up opacity-0" style="animation-delay: 300ms;">
+                <span class="event-badge badge-meetup">Meetup</span>
+                <h3 class="text-2xl font-bold text-study-text mt-4 mb-2">Startup Founders Circle</h3>
+                <div class="flex items-center text-study-text/70 text-sm mb-2">
+                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                    </svg>
+                    <span>November 8, 2025 | 6:00 PM - 8:00 PM</span>
+                </div>
+                <div class="flex items-center text-study-text/70 text-sm mb-4">
+                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                    </svg>
+                    <span>StudySit Lounge</span>
+                </div>
+                <p class="text-study-text/80 mb-4">Monthly gathering for entrepreneurs to share experiences, challenges, and opportunities. Network with like-minded individuals.</p>
+                <button class="w-full bg-study-accent-cta text-study-text py-2 rounded-lg font-semibold hover:bg-opacity-90 transition-all duration-200">Join Meetup</button>
+            </div>
+
+            <!-- Event Card 4 -->
+            <div class="event-card bg-study-card rounded-xl shadow-md p-6 animate-fade-slide-up opacity-0" style="animation-delay: 400ms;">
+                <span class="event-badge badge-workshop">Workshop</span>
+                <h3 class="text-2xl font-bold text-study-text mt-4 mb-2">AI & Machine Learning Basics</h3>
+                <div class="flex items-center text-study-text/70 text-sm mb-2">
+                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                    </svg>
+                    <span>November 12, 2025 | 2:00 PM - 6:00 PM</span>
+                </div>
+                <div class="flex items-center text-study-text/70 text-sm mb-4">
+                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                    </svg>
+                    <span>StudySit Tech Hub</span>
+                </div>
+                <p class="text-study-text/80 mb-4">Introduction to AI and ML concepts with practical examples. Learn how to build your first ML model.</p>
+                <button class="w-full bg-study-accent-cta text-study-text py-2 rounded-lg font-semibold hover:bg-opacity-90 transition-all duration-200">Register Now</button>
+            </div>
+
+            <!-- Event Card 5 -->
+            <div class="event-card bg-study-card rounded-xl shadow-md p-6 animate-fade-slide-up opacity-0" style="animation-delay: 500ms;">
+                <span class="event-badge badge-networking">Networking</span>
+                <h3 class="text-2xl font-bold text-study-text mt-4 mb-2">Career Fair 2025</h3>
+                <div class="flex items-center text-study-text/70 text-sm mb-2">
+                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                    </svg>
+                    <span>November 20, 2025 | 10:00 AM - 5:00 PM</span>
+                </div>
+                <div class="flex items-center text-study-text/70 text-sm mb-4">
+                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                    </svg>
+                    <span>StudySit Convention Hall</span>
+                </div>
+                <p class="text-study-text/80 mb-4">Connect with top employers and explore career opportunities. Bring your resume and network with recruiters.</p>
+                <button class="w-full bg-study-accent-cta text-study-text py-2 rounded-lg font-semibold hover:bg-opacity-90 transition-all duration-200">Get Free Pass</button>
+            </div>
+
+            <!-- Event Card 6 -->
+            <div class="event-card bg-study-card rounded-xl shadow-md p-6 animate-fade-slide-up opacity-0" style="animation-delay: 600ms;">
+                <span class="event-badge badge-meetup">Meetup</span>
+                <h3 class="text-2xl font-bold text-study-text mt-4 mb-2">Design Thinking Workshop</h3>
+                <div class="flex items-center text-study-text/70 text-sm mb-2">
+                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                    </svg>
+                    <span>November 25, 2025 | 3:00 PM - 6:00 PM</span>
+                </div>
+                <div class="flex items-center text-study-text/70 text-sm mb-4">
+                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                    </svg>
+                    <span>StudySit Creative Space</span>
+                </div>
+                <p class="text-study-text/80 mb-4">Learn design thinking methodology to solve complex problems creatively. Hands-on activities and real case studies.</p>
+                <button class="w-full bg-study-accent-cta text-study-text py-2 rounded-lg font-semibold hover:bg-opacity-90 transition-all duration-200">Reserve Spot</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- WHY ATTEND SECTION -->
+    <section class="bg-study-card py-20 mt-16">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center text-study-text mb-12">Why Attend Our Events?</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-study-accent-cta rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-8 h-8 text-study-text" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-study-text mb-2">Network & Connect</h3>
+                    <p class="text-study-text/80">Meet like-minded individuals, build meaningful connections, and expand your professional network.</p>
+                </div>
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-study-accent-cta rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-8 h-8 text-study-text" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-study-text mb-2">Learn & Grow</h3>
+                    <p class="text-study-text/80">Gain new skills through hands-on workshops, expert talks, and collaborative learning experiences.</p>
+                </div>
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-study-accent-cta rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-8 h-8 text-study-text" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-study-text mb-2">Build & Create</h3>
+                    <p class="text-study-text/80">Turn ideas into reality through hackathons and collaborative projects with talented peers.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA SECTION -->
+    <section class="container mx-auto px-6 py-20 text-center">
+        <h2 class="text-4xl font-bold text-study-text mb-4">Stay Updated</h2>
+        <p class="text-lg text-study-text/80 mb-8 max-w-2xl mx-auto">Subscribe to our newsletter to receive updates about upcoming events, workshops, and community activities.</p>
+        <div class="max-w-md mx-auto flex gap-4">
+            <input type="email" placeholder="Enter your email" class="flex-1 px-4 py-3 rounded-lg border border-study-border bg-study-bg text-study-text focus:outline-none focus:ring-2 focus:ring-study-accent-cta">
+            <button class="bg-study-accent-cta text-study-text px-6 py-3 rounded-lg font-semibold hover:bg-opacity-90 transition-all duration-200">Subscribe</button>
+        </div>
+    </section>
+</main>
+
+<!-- FOOTER -->
+<footer class="bg-study-card mt-20">
+    <div class="container mx-auto px-6 py-8 text-center text-study-text/60">
+        <p>&copy; 2025 StudySit. All rights reserved.</p>
+    </div>
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const themeToggle = document.getElementById("theme-toggle");
+  const darkIcon = document.getElementById("theme-toggle-dark-icon");
+  const lightIcon = document.getElementById("theme-toggle-light-icon");
+
+  function setTheme(isDark) {
+    if (typeof isDark !== 'boolean') return;
+    document.documentElement.classList.toggle("dark", isDark);
+    if (lightIcon) lightIcon.classList.toggle("hidden", !isDark);
+    if (darkIcon) darkIcon.classList.toggle("hidden", isDark);
+    try { localStorage.setItem("color-theme", isDark ? "dark" : "light"); } catch(e){}
+  }
+
+  if (themeToggle) {
+    const prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+    const savedTheme = (() => { try { return localStorage.getItem("color-theme"); } catch(e) { return null; } })();
+    setTheme(savedTheme === "dark" || (!savedTheme && prefersDark));
+    themeToggle.addEventListener("click", () => {
+      setTheme(!document.documentElement.classList.contains("dark"));
+    });
+  }
+
+  const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+  const mobileNav = document.getElementById('mobileNav');
+  if (mobileMenuBtn && mobileNav) {
+    mobileMenuBtn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      if (mobileNav.classList.contains('show')) {
+        mobileNav.classList.remove('show');
+        setTimeout(() => mobileNav.classList.add('hidden'), 300);
+      } else {
+        mobileNav.classList.remove('hidden');
+        setTimeout(() => mobileNav.classList.add('show'), 10);
+      }
+    });
+
+    document.addEventListener('click', function(event) {
+      if (!mobileNav.contains(event.target) && !mobileMenuBtn.contains(event.target) && mobileNav.classList.contains('show')) {
+        mobileNav.classList.remove('show');
+        setTimeout(() => mobileNav.classList.add('hidden'), 300);
+      }
+    });
+  }
+
+  const authDropdownBtn = document.getElementById('authDropdownBtn');
+  const authDropdown = document.getElementById('authDropdown');
+
+  if (authDropdownBtn && authDropdown) {
+    authDropdownBtn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      authDropdown.classList.toggle('hidden');
+    });
+
+    document.addEventListener('click', function() {
+      if (!authDropdown.classList.contains('hidden')) authDropdown.classList.add('hidden');
+    });
+
+    authDropdown.addEventListener('click', function(e) {
+      const target = e.target.closest('a');
+      if (target) authDropdown.classList.add('hidden');
+    });
+  }
+
+  const loginLink = document.getElementById("loginLink");
+  const signupLink = document.getElementById("signupLink");
+  const logoutLink = document.getElementById("logoutLink");
+
+  function safeAddClass(el, className) { if (el && el.classList) el.classList.add(className); }
+  function safeRemoveClass(el, className) { if (el && el.classList) el.classList.remove(className); }
+
+  function updateAuthMenu() {
+    const isLoggedIn = (function(){
+      try { return localStorage.getItem("isLoggedIn") === "true"; } catch (e) { return false; }
+    })();
+
+    if (isLoggedIn) {
+      safeAddClass(loginLink, "hidden");
+      safeAddClass(signupLink, "hidden");
+      safeRemoveClass(logoutLink, "hidden");
+    } else {
+      safeRemoveClass(loginLink, "hidden");
+      safeRemoveClass(signupLink, "hidden");
+      safeAddClass(logoutLink, "hidden");
+    }
+  }
+
+  window.logout = function() {
+    try {
+      localStorage.removeItem('studysit_user');
+      localStorage.setItem('isLoggedIn', 'false');
+    } catch (e) {}
+    updateAuthMenu();
+  };
+
+  window.login = function(fakeUser) {
+    const user = fakeUser || { name: (fakeUser && fakeUser.name) || 'User', email: (fakeUser && fakeUser.email) || '' };
+    try {
+      if (user) localStorage.setItem('studysit_user', JSON.stringify(user));
+      localStorage.setItem('isLoggedIn', 'true');
+    } catch (e) {}
+    updateAuthMenu();
+  };
+
+  updateAuthMenu();
+});
+</script>
+
+</body>
+</html>
