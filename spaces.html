@@ -1,486 +1,209 @@
 <!DOCTYPE html>
-<html lang="en" class="">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Our Spaces - CoWorkHub</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            "study-bg": "var(--color-background-primary)",
-            "study-card": "var(--color-background-secondary)",
-            "study-text": "var(--color-text-primary)",
-            "study-accent-cta": "var(--color-accent-cta)",
-            "study-accent-secondary": "var(--color-accent-secondary)",
-            "study-border": "var(--color-border)",
-          },
-          keyframes: {
-            "fade-slide-up": {
-              "0%": { opacity: "0", transform: "translateY(1rem)" },
-              "100%": { opacity: "1", transform: "translateY(0)" },
-            },
-          },
-          animation: {
-            "fade-slide-up": "fade-slide-up 0.8s ease-out forwards",
-          }
-        },
-      },
-      darkMode: "class",
-      plugins: [],
-    }
-  </script>
+  <title>Our Spaces - StudySit</title>
+  <link rel="stylesheet" href="style.css" />
   <style>
-    :root {
-      --color-background-primary: #FFFFFF;
-      --color-background-secondary: #F8F8F8;
-      --color-text-primary: #333333;
-      --color-accent-cta: #FFC72C;
-      --color-accent-secondary: #A9B497;
-      --color-border: #E0E0E0;
-    }
-    .dark {
-      --color-background-primary: #121212;
-      --color-background-secondary: #1E1E1E;
-      --color-text-primary: #F5F5F5;
-      --color-border: #3A3A3A;
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      background-color: #f9fafb;
+      color: #111827;
     }
     body {
-        background-color: var(--color-background-primary);
-        color: var(--color-text-primary);
-    }
-
-/* Desktop Navbar Hover Animations */
-    @media (min-width: 768px) {
-        .nav-link-item {
-            position: relative;
-            overflow: hidden;
-            padding: 10px 20px;
-            border-radius: 25px;
-            transition: all 0.3s ease-in-out;
-        }
-        
-        .nav-link-item::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: var(--color-accent-cta);
-            border-radius: 25px;
-            transition: left 0.3s ease-in-out;
-            z-index: -1;
-        }
-        
-        .nav-link-item:hover::before {
-            left: 0;
-        }
-        
-        .nav-link-item:hover {
-            color: var(--color-text-primary);
-            transform: translateY(-2px);
-            font-weight: 700;
-        }
-    }
-
-
-    @media (max-width: 768px) {
-    #mobileNav {
-        width: 50% !important;
-        max-width: 200px;
-        position: absolute;
-        right: 0;
-        top: 100%;
-        transform: translateY(-20px);
-        opacity: 0;
-        transition: all 0.3s ease-in-out;
-        pointer-events: none;
-    }
-    
-    #mobileNav.show {
-        transform: translateY(0);
-        opacity: 1;
-        pointer-events: all;
-    }
+  background-image: url('TECHNOLOGIA.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
 }
 
-/* Desktop Navbar Hover Animations */
-@media (min-width: 768px) {
-    .nav-link-item {
-        position: relative;
-        overflow: hidden;
-        padding: 10px 20px;
-        border-radius: 25px;
-        transition: all 0.3s ease-in-out;
-    }
-    
-    .nav-link-item::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: -100%;
-        width: 100%;
-        height: 100%;
-        background: var(--color-accent-cta);
-        border-radius: 25px;
-        transition: left 0.3s ease-in-out;
-        z-index: -1;
-    }
-    
-    .nav-linkItem:hover::before {
-        left: 0;
-    }
-    
-    .nav-link-item:hover {
-        color: var(--color-text-primary);
-        transform: translateY(-2px);
-        font-weight: 700;
+
+    header {
+      background-color: #1f2937;
+      color: white;
+      padding: 30px 0;
+      text-align: center;
     }
 
-    /* Account Button Hover - Subtle */
-    #authDropdownBtn {
-        transition: all 0.3s ease-in-out;
-        border-radius: 10px;
+    nav {
+      background-color: #374151;
+      display: flex;
+      justify-content: center;
+      padding: 15px 0;
     }
-    
-    #authDropdownBtn:hover {
-        background: var(--color-accent-cta);
-        color: var(--color-text-primary);
-        transform: translateY(-1px);
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      padding: 10px 20px;
+      font-weight: 500;
+      transition: background 0.3s ease;
     }
-}
 
-header nav a.logo-container {
-    display: flex !important;
-    align-items: center !important;
-    gap: 8px; /* spacing between logo and text */
-    text-decoration: none;
-    transform-origin: center;
-    transition: transform 0.3s ease-in-out; /* smooth scale */
-}
-
-header nav a.logo-container:hover {
-    transform: scale(1.05); /* increase both logo + text smoothly */
-}
-
-.navbar-logo {
-    height: 40px;
-    filter: brightness(0);
-}
-
-.dark .navbar-logo {
-    filter: brightness(0) invert(1);
-}
-
-.navbar-logo {
-    height: clamp(30px, 5vw, 45px); /* min: 30px, scales with screen, max: 45px */
-    filter: brightness(0);
-}
-
-header nav a.logo-container {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap; /* allows logo and text to break line if needed */
-    gap: 0.4rem;
-}
-
-header nav a.logo-container span {
-    font-size: clamp(14px, 2vw, 20px); /* responsive text */
-}
-   
-@media (max-width: 768px) {
-    .navbar-logo {
-        height: 32px;
+    nav a:hover {
+      background-color: #4b5563;
+      border-radius: 5px;
     }
-    header nav a.logo-container span {
-        font-size: 14px;
-    }
-}
 
-@media (max-width: 480px) {
-    .navbar-logo {
-        height: 28px;
+    .container {
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 0 20px;
     }
-    header nav a.logo-container span {
-        font-size: 12px;
+
+    h2 {
+      text-align: center;
+      font-size: 2.5rem;
+      margin-bottom: 40px;
+      animation: fadeIn 1s ease-out;
     }
-}
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      animation: fadeInUp 1.2s ease-in-out;
+    }
+
+    .card {
+      background-color: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    .card img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .card:hover img {
+      transform: scale(1.05);
+    }
+
+    .card-body {
+      padding: 20px;
+    }
+
+    .card-title {
+      font-size: 1.4em;
+      margin: 0 0 10px;
+      color: #1f2937;
+    }
+
+    .card-desc {
+      font-size: 0.95em;
+      color: #4b5563;
+      line-height: 1.5;
+    }
+
+    footer {
+      background-color: #1f2937;
+      color: white;
+      text-align: center;
+      padding: 20px 0;
+      margin-top: 60px;
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 500px) {
+      .card img {
+        height: 180px;
+      }
+    }
   </style>
 </head>
-<body class="bg-study-bg text-study-text">
+<body>
 
-<!-- HEADER & NAVIGATION -->
-<header class="fixed top-0 w-full bg-study-bg/95 backdrop-blur-sm shadow-sm transition-all duration-300 z-50">
-    <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-        <!-- Logo on left -->
-        <a href="index.html" class="text-2xl font-bold text-study-text">StudySit</a>
-        <a href="index.html" class="flex items-center space-x-2 logo-container">
-  <img src="StudySit_logo.svg" class="navbar-logo h-12 w-auto" alt="StudySit">
-  <span class="text-2xl font-bold text-study-text">StudySit</span>
-</a>
-        
-        <!-- Centered Navigation Links -->
-        <div class="hidden md:flex items-center space-x-2 absolute left-1/2 transform -translate-x-1/2">
-            <a href="index.html" class="nav-link-item text-study-text hover:text-study-text transition-colors duration-200">Home</a>
-            <a href="about.html" class="nav-link-item text-study-text hover:text-study-text transition-colors duration-200">About</a>
-            <a href="spaces.html" class="nav-link-item text-study-text hover:text-study-text transition-colors duration-200">Spaces</a>
-            <a href="pricing.html" class="nav-link-item text-study-text hover:text-study-text transition-colors duration-200">Pricing</a>
-            <a href="contact.html" class="nav-link-item text-study-text hover:text-study-text transition-colors duration-200">Contact</a>
-            <a href="faq.html" class="nav-link-item text-study-text hover:text-study-text transition-colors duration-200">FAQ</a>
+  <header>
+    <h1>Explore Our Spaces</h1>
+    <p>Designed to boost your productivity and comfort</p>
+  </header>
+
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="about.html">About Us</a>
+    <a href="spaces.html">Spaces</a>
+    <a href="pricing.html">Pricing</a>
+    <a href="contact.html">Contact</a>
+    <a href="booking.html">Book Now</a> <!-- NEW -->
+  </nav>
+
+  <div class="container">
+    <h2>Workspace Options</h2>
+    <div class="grid">
+
+      <!-- Hot Desk -->
+      <div class="card">
+        <img src="https://smartway2.com/wp-content/uploads/2020/11/hot-desking-for-the-open-plan-office-1080x675.jpg" alt="Hot Desk">
+        <div class="card-body">
+          <h3 class="card-title">Hot Desk</h3>
+          <p class="card-desc">Flexible seating in a shared environment. Perfect for freelancers and digital nomads who love variety.</p>
         </div>
-
-        <!-- Right side buttons - shifted more to right -->
-        <div class="flex items-center space-x-4 ml-auto">
-            <!-- Auth Dropdown Button -->
-            <div class="relative">
-                <!-- Auth Button -->
-                <button id="authDropdownBtn" class="flex items-center space-x-1 text-study-text hover:text-study-accent-secondary transition-colors duration-200 p-2 rounded-lg hover:bg-study-bg/20">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
-                    </svg>
-                    <span>Account</span>
-                </button>
-                
-                <!-- Dropdown Menu -->
-          <div id="authDropdown" 
-             class="hidden absolute right-0 mt-2 w-48 bg-study-bg border border-study-border rounded-lg shadow-lg z-50 py-2">
-             <!-- When not logged in -->
-            <a href="login.html" 
-            id="loginLink"
-            class="block px-4 py-2 text-study-text hover:bg-study-accent-cta hover:text-study-text transition-colors duration-200">Login</a>
-            <a href="signup.html" 
-             id="signupLink"
-             class="block px-4 py-2 text-study-text hover:bg-study-accent-cta hover:text-study-text transition-colors duration-200">Sign Up</a>
-
-          <!-- When logged in -->
-            <a href="#" onclick="logout()" 
-            id="logoutLink"
-            class="hidden block px-4 py-2 text-study-text hover:bg-study-accent-cta hover:text-study-text transition-colors duration-200">Logout</a>
-            </div>
-          </div>
-
-            <!-- Book Now button -->
-            <a href="pricing.html#plans" class="bg-study-accent-cta text-study-text px-4 py-2 rounded-lg font-semibold hover:bg-opacity-90 transition-all duration-200 active:scale-95">Book Now</a>
-            
-            <!-- Mobile menu button -->
-            <button class="md:hidden bg-study-accent-cta text-study-text p-2 rounded-lg" id="mobileMenuBtn">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                </svg>
-            </button>
-            
-            <!-- Theme toggle -->
-            <button id="theme-toggle" class="p-2 rounded-full transition-colors duration-200 hover:bg-study-accent-secondary/20">
-                <svg id="theme-toggle-dark-icon" class="h-6 w-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9.003 9.003 0 0015 3a9 9 0 00-9 9c0 4.223 2.91 7.82 6.873 8.783.5.093.5-.213.5-.474V19.5a.5.5 0 00-.5-.5 8.5 8.5 0 01-8.5-8.5 8.5 8.5 0 0110.158-8.135 1 1 0 001.079.136A8.5 8.5 0 0122 10.5c0 1.252-.267 2.44-.736 3.522a.5.5 0 00.182.635l2.518 1.708a.5.5 0 00.69-.635z"/>
-                </svg>
-                <svg id="theme-toggle-light-icon" class="h-6 w-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M12 5a7 7 0 100 14 7 7 0 000-14z"/>
-                </svg>
-            </button>
-        </div>
-    </nav>
-
-    <!-- Mobile Navigation Menu -->
-    <div class="md:hidden hidden bg-study-accent-cta shadow-lg" id="mobileNav" style="width: 50%; max-width: 200px; position: absolute; right: 0; top: 100%;">
-        <div class="container mx-auto px-6 py-6 flex flex-col space-y-4">
-            <a href="index.html" class="text-study-text font-semibold hover:bg-study-bg/20 py-3 px-4 rounded-lg transition-all duration-200">Home</a>
-            <a href="about.html" class="text-study-text font-semibold hover:bg-study-bg/20 py-3 px-4 rounded-lg transition-all duration-200">About</a>
-            <a href="spaces.html" class="text-study-text font-semibold hover:bg-study-bg/20 py-3 px-4 rounded-lg transition-all duration-200">Spaces</a>
-            <a href="pricing.html" class="text-study-text font-semibold hover:bg-study-bg/20 py-3 px-4 rounded-lg transition-all duration-200">Pricing</a>
-            <a href="contact.html" class="text-study-text font-semibold hover:bg-study-bg/20 py-3 px-4 rounded-lg transition-all duration-200">Contact</a>
-            <a href="faq.html" class="text-study-text font-semibold hover:bg-study-bg/20 py-3 px-4 rounded-lg transition-all duration-200">FAQ</a>
-            <!-- Auth in mobile menu -->
-            <a href="login.html" class="text-study-text font-semibold hover:bg-study-bg/20 py-3 px-4 rounded-lg transition-all duration-200">Login</a>
-            <a href="signup.html" class="text-study-text font-semibold hover:bg-study-bg/20 py-3 px-4 rounded-lg transition-all duration-200">Sign Up</a>
-            <!-- Book Now in mobile menu -->
-            <a href="pricing.html#plans" class="bg-study-bg text-study-text font-semibold py-3 px-4 rounded-lg text-center hover:bg-opacity-90 transition-all duration-200 active:scale-95 mt-2">Book Now</a>
-        </div>
-    </div>
-</header>
-
-  <!-- MAIN CONTENT -->
-  <main class="pt-24">
-    <div class="container mx-auto px-6 py-12">
-      <header class="text-center mb-16">
-        <h1 class="text-5xl md:text-6xl font-bold text-study-text animate-fade-slide-up opacity-0">Our Spaces</h1>
-        <p class="mt-4 text-lg text-study-text/80 animate-fade-slide-up opacity-0" style="animation-delay: 200ms;">Designed for productivity, comfort, and collaboration.</p>
-      </header>
-
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-
-        <!-- Hot Desk -->
-        <div class="bg-study-card border border-study-border rounded-xl p-6 transition-all duration-300 hover:shadow-2xl hover:border-study-accent-cta hover:-translate-y-1 animate-fade-slide-up opacity-0" style="animation-delay: 400ms;">
-          <img src="https://smartway2.com/wp-content/uploads/2020/11/hot-desking-for-the-open-plan-office-1080x675.jpg" alt="Hot Desk" class="w-full h-48 object-cover rounded-lg mb-4">
-          <h3 class="text-2xl font-bold text-study-text mb-2">Hot Desk</h3>
-          <p class="text-study-text/80">Flexible seating in a shared environment. Perfect for freelancers and digital nomads who love variety.</p>
-        </div>
-
-        <!-- Dedicated Desk -->
-        <div class="bg-study-card border border-study-border rounded-xl p-6 transition-all duration-300 hover:shadow-2xl hover:border-study-accent-cta hover:-translate-y-1 animate-fade-slide-up opacity-0" style="animation-delay: 600ms;">
-          <img src="https://images.squarespace-cdn.com/content/v1/54f54ee5e4b08c831d40bb34/1589058802124-1OQVOP2BP6BE6XAMO7UL/RollerDesk-018a.jpg" alt="Dedicated Desk" class="w-full h-48 object-cover rounded-lg mb-4">
-          <h3 class="text-2xl font-bold text-study-text mb-2">Dedicated Desk</h3>
-          <p class="text-study-text/80">Your own desk reserved daily. Includes storage and 24/7 access for consistent productivity.</p>
-        </div>
-
-        <!-- Private Office -->
-        <div class="bg-study-card border border-study-border rounded-xl p-6 transition-all duration-300 hover:shadow-2xl hover:border-study-accent-cta hover:-translate-y-1 animate-fade-slide-up opacity-0" style="animation-delay: 800ms;">
-          <img src="https://images.unsplash.com/photo-1593642634367-d91a135587b5?fit=crop&w=1000&q=80" alt="Private Office" class="w-full h-48 object-cover rounded-lg mb-4">
-          <h3 class="text-2xl font-bold text-study-text mb-2">Private Office</h3>
-          <p class="text-study-text/80">Fully furnished private offices for teams of 1-10. Quiet, secure, and fully serviced.</p>
-        </div>
-
-        <!-- Additional cards can be added here -->
-
       </div>
-    </div>
-  </main>
 
-  <!-- FOOTER -->
-  <footer class="bg-study-card mt-20">
-    <div class="container mx-auto px-6 py-8 text-center text-study-text/60">
-      <p>&copy; 2025 StudySit. All rights reserved.</p>
+      <!-- Dedicated Desk -->
+      <div class="card">
+        <img src="https://images.squarespace-cdn.com/content/v1/54f54ee5e4b08c831d40bb34/1589058802124-1OQVOP2BP6BE6XAMO7UL/RollerDesk-018a.jpg" alt="Dedicated Desk">
+        <div class="card-body">
+          <h3 class="card-title">Dedicated Desk</h3>
+          <p class="card-desc">Your own desk reserved daily. Includes storage and 24/7 access for consistent productivity.</p>
+        </div>
+      </div>
+
+      <!-- Private Office -->
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1593642634367-d91a135587b5?fit=crop&w=1000&q=80" alt="Private Office">
+        <div class="card-body">
+          <h3 class="card-title">Private Office</h3>
+          <p class="card-desc">Fully furnished private offices for teams of 1-10. Quiet, secure, and fully serviced.</p>
+        </div>
+      </div>
+
+      <!-- Meeting Room -->
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1573164574572-cb89e39749b4?fit=crop&w=1000&q=80" alt="Meeting Room">
+        <div class="card-body">
+          <h3 class="card-title">Meeting Rooms</h3>
+          <p class="card-desc">Modern, high-tech rooms for meetings and presentations. Equipped with whiteboards, projectors, and more.</p>
+        </div>
+      </div>
+
+      <!-- Event Space -->
+      <div class="card">
+        <img src="https://www.sgmytaxi.com/wp-content/uploads/WSPACE-Coworking-Event-Hall.jpg" alt="Event Space">
+        <div class="card-body">
+          <h3 class="card-title">Event Space</h3>
+          <p class="card-desc">Spacious area for workshops, networking events, or company parties. Catering and support available.</p>
+        </div>
+      </div>
+
     </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 StudySit. All rights reserved.</p>
   </footer>
-
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-  /* ---------- THEME TOGGLE (safe) ---------- */
-  const themeToggle = document.getElementById("theme-toggle");
-  const darkIcon = document.getElementById("theme-toggle-dark-icon");
-  const lightIcon = document.getElementById("theme-toggle-light-icon");
-
-  function setTheme(isDark) {
-    if (typeof isDark !== 'boolean') return;
-    document.documentElement.classList.toggle("dark", isDark);
-    if (lightIcon) lightIcon.classList.toggle("hidden", !isDark);
-    if (darkIcon) darkIcon.classList.toggle("hidden", isDark);
-    try { localStorage.setItem("color-theme", isDark ? "dark" : "light"); } catch(e){}
-  }
-
-  if (themeToggle) {
-    const prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
-    const savedTheme = (() => { try { return localStorage.getItem("color-theme"); } catch(e) { return null; } })();
-    setTheme(savedTheme === "dark" || (!savedTheme && prefersDark));
-    themeToggle.addEventListener("click", () => {
-      setTheme(!document.documentElement.classList.contains("dark"));
-    });
-  }
-
-  /* ---------- MOBILE MENU (safe) ---------- */
-  const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-  const mobileNav = document.getElementById('mobileNav');
-  if (mobileMenuBtn && mobileNav) {
-    mobileMenuBtn.addEventListener('click', function(e) {
-      e.stopPropagation();
-      if (mobileNav.classList.contains('show')) {
-        mobileNav.classList.remove('show');
-        setTimeout(() => mobileNav.classList.add('hidden'), 300);
-      } else {
-        mobileNav.classList.remove('hidden');
-        // small timeout so CSS transition can trigger
-        setTimeout(() => mobileNav.classList.add('show'), 10);
-      }
-    });
-
-    // Close mobile menu when clicking outside (only if open)
-    document.addEventListener('click', function(event) {
-      if (!mobileNav.contains(event.target) && !mobileMenuBtn.contains(event.target) && mobileNav.classList.contains('show')) {
-        mobileNav.classList.remove('show');
-        setTimeout(() => mobileNav.classList.add('hidden'), 300);
-      }
-    });
-  }
-
-  /* ---------- AUTH DROPDOWN + AUTH MENU ---------- */
-  const authDropdownBtn = document.getElementById('authDropdownBtn');
-  const authDropdown = document.getElementById('authDropdown');
-
-  // Toggle dropdown (single handler only if button exists)
-  if (authDropdownBtn && authDropdown) {
-    authDropdownBtn.addEventListener('click', function(e) {
-      e.stopPropagation();
-      authDropdown.classList.toggle('hidden');
-    });
-
-    // Close dropdown when clicking anywhere else
-    document.addEventListener('click', function() {
-      if (!authDropdown.classList.contains('hidden')) authDropdown.classList.add('hidden');
-    });
-
-    // Close dropdown when clicking any link inside it (delegation)
-    authDropdown.addEventListener('click', function(e) {
-      const target = e.target.closest('a');
-      if (target) authDropdown.classList.add('hidden');
-    });
-  }
-
-  // Elements that may or may not exist on every page
-  const loginLink = document.getElementById("loginLink");
-  const signupLink = document.getElementById("signupLink");
-  const logoutLink = document.getElementById("logoutLink");
-
-  function safeAddClass(el, className) { if (el && el.classList) el.classList.add(className); }
-  function safeRemoveClass(el, className) { if (el && el.classList) el.classList.remove(className); }
-
-  // Update menu based on localStorage flag
-  function updateAuthMenu() {
-    const isLoggedIn = (function(){
-      try { return localStorage.getItem("isLoggedIn") === "true"; } catch (e) { return false; }
-    })();
-
-    if (isLoggedIn) {
-      safeAddClass(loginLink, "hidden");
-      safeAddClass(signupLink, "hidden");
-      safeRemoveClass(logoutLink, "hidden");
-    } else {
-      safeRemoveClass(loginLink, "hidden");
-      safeRemoveClass(signupLink, "hidden");
-      safeAddClass(logoutLink, "hidden");
-    }
-
-    // Optional: show username somewhere if you have an element for it
-    const userNameEl = document.getElementById('userName');
-    if (userNameEl) {
-      const user = (function(){ try { return JSON.parse(localStorage.getItem('studysit_user') || 'null'); } catch (e) { return null; } })();
-      userNameEl.textContent = user && user.name ? user.name : 'User';
-    }
-  }
-
-  // Login helper (used after successful login)
-  function login(userObj) {
-    try {
-      if (userObj) localStorage.setItem('studysit_user', JSON.stringify(userObj));
-      localStorage.setItem('isLoggedIn', 'true');
-    } catch (e) {}
-    updateAuthMenu();
-  }
-
-  // Logout helper (clear stored info)
-  window.logout = function() {
-    try {
-      localStorage.removeItem('studysit_user');
-      localStorage.setItem('isLoggedIn', 'false');
-    } catch (e) {}
-    updateAuthMenu();
-    // optional redirect after logout:
-    // window.location.href = 'index.html';
-  };
-
-  // Expose login() globally if you want to call it elsewhere
-  window.login = function(fakeUser) {
-    const user = fakeUser || { name: (fakeUser && fakeUser.name) || 'User', email: (fakeUser && fakeUser.email) || '' };
-    login(user);
-  };
-
-  // Initialize dropdown visibility based on saved state
-  updateAuthMenu();
-
-}); // DOMContentLoaded
-</script>
 
 </body>
 </html>
